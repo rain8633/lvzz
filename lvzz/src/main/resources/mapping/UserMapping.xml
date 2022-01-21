@@ -5,4 +5,16 @@
     <select id="queryUser" resultType="User" parameterType="String">
         select * from l_user where user_name=#{userName} and password=#{password}
     </select>
+
+    <select id="findByUsername" parameterType="String" resultType="User">
+        select * from l_user where user_name=#{userName}
+    </select>
+
+    <select id="findById" parameterType="Integer" resultType="User">
+        select * from l_user where id=#{id}
+    </select>
+
+    <insert id="addUser" parameterType="User" >
+        insert into l_user(user_name,password,pic,salt,phone) values (#{userName},#{password},#{pic},#{salt},#{phone})
+    </insert>
 </mapper>

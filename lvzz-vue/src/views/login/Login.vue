@@ -82,7 +82,7 @@
       <el-input v-model="regForm.password" type="password" placeholder="请输入密码" autocomplete="off"></el-input>
     </el-form-item>
       <el-form-item prop="repassword">
-      <el-input v-model="regForm.repassword" type="password"  placeholder="请确认密码" autocomplete="off"></el-input>
+      <el-input v-model="regForm.repassword" type="password" @blur="cheakPassword()" placeholder="请确认密码" autocomplete="off"></el-input>
     </el-form-item>
     <el-form-item prop="phone">
       <el-input v-model="regForm.phone" type="text"  placeholder="请输入手机号" autocomplete="off"></el-input>
@@ -216,8 +216,9 @@ export default {
                 this.$router.push('/home');
                this.$message.success("欢迎回来")
             }
-            else{
-              this.$message.error("用户名或密码错误")
+            else  if(res.data.code === 4){
+              this.$message.error("用户名或密码错误");
+              console.log(res.msg);
               this.vcUrl = this.path+"/user/verifyCode?time=" + new Date();
             }
 
@@ -239,6 +240,9 @@ export default {
                 this.fileList=[];
                 this.$message.success("注册成功")
              }
+              setTimeout(function () {
+              _this.$router.push({path: '/'})
+            }, 3000)
             })
             }
             else{
@@ -271,6 +275,13 @@ export default {
           this.$message.error("该用户名已被占用");
         }
       })
+    },
+    cheakPassword(){
+      let password=this.regForm.password || null
+      let repassword=this.regForm.repassword || null
+      if( password != repassword){
+         this.$message.error("两次密码不一致，请重新输入")
+      }
     },
     exceed(){
       const _this=this

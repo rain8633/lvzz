@@ -4,19 +4,25 @@ import com.alibaba.fastjson.JSONObject;
 import com.lvzz.demo.entity.Result;
 import com.lvzz.demo.entity.User;
 import com.lvzz.demo.service.UserService;
+import com.lvzz.demo.utils.MD5Util;
 import com.lvzz.demo.utils.VerificationCode;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
+import java.util.UUID;
 
 @RestController
 @RequestMapping("/user")
@@ -31,13 +37,37 @@ public class UserController {
             if(code == null || verify_code == null || "".equals(code) || !verify_code.toLowerCase().equals(code.toLowerCase())){
                 return Result.othereError(3,"验证码错误");
             }else {
-                User u = userService.queryUser(userName,password);
-                String userInfo = JSONObject.toJSONString(u);
-                if (u != null) {
-                    return Result.success(userInfo);
-                } else return Result.error();
+                //        System.out.println(username+"  "+password);
+                //登录验证
+                UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
+                Subject subject = SecurityUtils.getSubject();
+                User user=userService.findByUsername(userName);
+                try {
+                    subject.login(token);
+                } catch (AuthenticationException e) {
+                    return Result.othereError(4,"用户名或密码错误");
+                }
+                return Result.success();
             }
+//                User u = userService.queryUser(userName,password);
+//                String userInfo = JSONObject.toJSONString(u);
+//                if (u != null) {
+//                    return Result.success(userInfo);
+//                } else return Result.error();
         }
+
+    @PostMapping("/upload")
+    public Result upload(MultipartFile file) throws IOException {
+        String originalFilename = file.getOriginalFilename();
+//        String extension = FilenameUtils.getExtension();
+        String suffix = originalFilename.substring(originalFilename.lastIndexOf("."));
+        String prefix = UUID.randomUUID().toString().replaceAll("-", "");
+        String newName=prefix+suffix;
+        String path="H:/upload";
+
+        file.transferTo(new File(path,newName));
+        return Result.success("/pics/"+newName);
+    }
 
         @GetMapping("/verifyCode")
         public void verifyCode(HttpServletRequest request, HttpServletResponse resp) throws IOException {
@@ -52,5 +82,28 @@ public class UserController {
 //        String verify_code = (String) request.getSession().getAttribute("verify_code");
             VerificationCode.output(image,resp.getOutputStream());
         }
+
+    @RequestMapping("/addUser")
+    public Result addUser(@RequestBody User user){
+        String salt = MD5Util.md5Encrypt32Lower(user.getPassword());
+        // 使用SimpleHash类对原始密码进行加密
+        String Pw = new SimpleHash("MD5", user.getPassword(),salt, 1024).toHex();
+        user.setPassword(Pw);
+        user.setSalt(salt);
+        int i = userService.addUser(user);
+        if(i>0){
+            return Result.success();
+        }
+        else return Result.error();
+    }
+
+    @GetMapping("/cheakUsername/{username}")
+    public Result cheakUsername(@PathVariable("username") String userName){
+        User user=userService.findByUsername(userName);
+        if(user!=null){
+            return Result.error();
+        }else return Result.success();
+    }
+
 }
 

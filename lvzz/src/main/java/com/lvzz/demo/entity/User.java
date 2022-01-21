@@ -12,7 +12,7 @@ public class User {
     private String userName;
     private String password;
     private String pic;
+    private String salt;
     private String phone;
-    private String validateCode;
 
 }

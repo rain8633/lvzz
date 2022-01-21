@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.annotation.security.DenyAll;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,26 +25,26 @@ public class Result<T> {
     private static final String SUCCESS_MSG="success";
     private static final String ERROR_MSG="error";
 
-    public static <T> com.syxu.yitu.entity.Result<T> success(T data){
-        return new com.syxu.yitu.entity.Result<>(SUCCESS_CODE,SUCCESS_MSG,data);
+    public static <T> Result<T> success(T data){
+        return new Result<>(SUCCESS_CODE,SUCCESS_MSG,data);
 
     }
 
-    public static <T> com.syxu.yitu.entity.Result<T> error(T data){
-        return new com.syxu.yitu.entity.Result<>(ERROR_CODE,ERROR_MSG,data);
+    public static <T> Result<T> error(T data){
+        return new Result<>(ERROR_CODE,ERROR_MSG,data);
 
     }
 
-    public static <T> com.syxu.yitu.entity.Result<T> success(){
-        return new com.syxu.yitu.entity.Result<>(SUCCESS_CODE,SUCCESS_MSG);
+    public static <T> Result<T> success(){
+        return new Result<>(SUCCESS_CODE,SUCCESS_MSG);
 
     }
 
-    public static <T> com.syxu.yitu.entity.Result<T> error(){
-        return new com.syxu.yitu.entity.Result<>(ERROR_CODE,ERROR_MSG);
+    public static <T> Result<T> error(){
+        return new Result<>(ERROR_CODE,ERROR_MSG);
     }
 
-    public static <T> com.syxu.yitu.entity.Result<T> othereError(Integer code, String msg){
-        return new com.syxu.yitu.entity.Result<>(code,msg);
+    public static <T> Result<T> othereError(Integer code,String msg){
+        return new Result<>(code,msg);
     }
 }

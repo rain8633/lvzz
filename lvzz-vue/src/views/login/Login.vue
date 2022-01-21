@@ -84,6 +84,9 @@
       <el-form-item prop="repassword">
       <el-input v-model="regForm.repassword" type="password"  placeholder="请确认密码" autocomplete="off"></el-input>
     </el-form-item>
+    <el-form-item prop="phone">
+      <el-input v-model="regForm.phone" type="text"  placeholder="请输入手机号" autocomplete="off"></el-input>
+    </el-form-item>
     <!-- <el-form-item prop="role"  style="margin-right:244px;">
       <el-radio-group v-model="regForm.role" size="small">
       <el-radio label="1" class="radioclass" border>管理员</el-radio>
@@ -133,7 +136,7 @@ export default {
           userName:'',
           password:'',
           repassword:'',
-          role:'',
+          phone:'',
           pic:''
       },
       vcUrl: this.path+"/user/verifyCode?time=" + new Date(),
@@ -167,11 +170,14 @@ export default {
             {required:true,message: '请输入确认密码', trigger: 'blur'},
             {min:6,max:12,message: '密码长度为6~12位',trigger:'blur'}
           ],//trigger 触发器提示错误信息
-           role:[
-            {required:true,message: '请选择角色', trigger: "change"},
-          ],
+          //  role:[
+          //   {required:true,message: '请选择角色', trigger: "change"},
+          // ],
            pic:[
             {required:true,message: '请选择头像', trigger: 'change'},
+          ],
+          phone:[
+            {required:true,message: '请输入手机号',trigger: 'blur'},
           ]
       },
     }

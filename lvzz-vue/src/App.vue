@@ -5,7 +5,14 @@
 </template>
 
 <script>
+
+
+
 export default {
+  name:"App",
+ components: {
+
+  },
   mounted() {
 	      setTimeout(() => {
 	        window.L2Dwidget.init({
@@ -24,14 +31,7 @@ export default {
 	    },
 }
 </script>
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-
-  color: #2c3e50;
-}
-
+<style lang="scss" scoped>
+@import './assets/css/app.scss';
 
 </style>

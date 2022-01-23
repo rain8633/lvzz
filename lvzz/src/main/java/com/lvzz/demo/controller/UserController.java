@@ -42,12 +42,13 @@ public class UserController {
                 UsernamePasswordToken token = new UsernamePasswordToken(userName, password);
                 Subject subject = SecurityUtils.getSubject();
                 User user=userService.findByUsername(userName);
+                String userInfo = JSONObject.toJSONString(user);
                 try {
                     subject.login(token);
                 } catch (AuthenticationException e) {
                     return Result.othereError(4,"用户名或密码错误");
                 }
-                return Result.success();
+                return Result.success(userInfo);
             }
 //                User u = userService.queryUser(userName,password);
 //                String userInfo = JSONObject.toJSONString(u);

@@ -1,7 +1,7 @@
 <template>
   <div class="the-header">
     <!--图标-->
-    <div class="header-logo" @click="goHome">
+    <div class="header-logo" @click="goHome()">
       <span>{{musicName}}</span>
     </div>
     <ul class="navbar" ref="change">
@@ -21,7 +21,7 @@
     <!--设置-->
     <div class="header-right" v-show="loginIn">
       <div id="user">
-        <img :src="path+'/'+user.pic"/>
+        <img :src="path+user.pic"/>
       </div>
       <ul class="menu">
         <li v-for="(item, index) in menuList" :key="index" @click="goMenuList(item.path)">{{item.name}}</li>
@@ -40,12 +40,13 @@ export default {
   mixins: [mixin],
   data () {
     return {
+      isLogin:false,
       musicName: '旅游自助平台',
       navMsg: [], // 左侧导航栏
       loginMsg: [], // 右侧导航栏
       menuList: [], // 用户下拉菜单项
       keywords: '',
-       user: {
+      user: {
        id:'',
        userName:'',
        password:'',
@@ -56,30 +57,35 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'userId',
-      'activeName',
-      'avator',
-      'username',
       'loginIn'
     ])
   },
   created () {
+
     this.navMsg = navMsg
     this.loginMsg = loginMsg
     this.menuList = menuList
+    let user=JSON.parse(window.sessionStorage.getItem("user"));
+    console.log(user);
+   if(user != null){
+     this.user=user;
+     this.$store.commit('setLoginIn', true);
+    //  this.isLogin = true;
+     console.log(this.isLogin);
+   }
   },
   mounted () {
-    // document.querySelector('#user').addEventListener('click', function (e) {
-    //   document.querySelector('.menu').classList.add('show')
-    //   e.stopPropagation()// 关键在于阻止冒泡
-    // }, false)
-    // // 点击“菜单”内部时，阻止事件冒泡。(这样点击内部时，菜单不会关闭)
-    // document.querySelector('.menu').addEventListener('click', function (e) {
-    //   e.stopPropagation()
-    // }, false)
-    // document.addEventListener('click', function () {
-    //   document.querySelector('.menu').classList.remove('show')
-    // }, false)
+    document.querySelector('#user').addEventListener('click', function (e) {
+      document.querySelector('.menu').classList.add('show')
+      e.stopPropagation()// 关键在于阻止冒泡
+    }, false)
+    // 点击“菜单”内部时，阻止事件冒泡。(这样点击内部时，菜单不会关闭)
+    document.querySelector('.menu').addEventListener('click', function (e) {
+      e.stopPropagation()
+    }, false)
+    document.addEventListener('click', function () {
+      document.querySelector('.menu').classList.remove('show')
+    }, false)
   },
   methods: {
     goHome () {
@@ -88,9 +94,12 @@ export default {
     goPage (path, value) {
       document.querySelector('.menu').classList.remove('show')
       this.changeIndex(value)
-      if (!this.loginIn && path === '/my-music') {
+      if (!this.loginIn && path === '/shoucang') {
         this.notify('请先登录', 'warning')
-      } else {
+      }
+      else if(!this.loginIn && path === '/my-trip'){
+        this.notify('请先登录', 'warning')
+        }else {
         this.$router.push({path: path})
       }
     },
@@ -106,6 +115,8 @@ export default {
         this.$router.push({path: path})
       } else {
         this.$store.commit('setLoginIn', false)
+        //  window.sessionStorage.clear()
+         window.sessionStorage.removeItem("user");
         this.$router.go(0)
       }
     },

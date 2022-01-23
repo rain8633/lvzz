@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvzz.demo.mapper.TripMapper">
+
+    <select id="querytripList" resultType="com.lvzz.demo.pojo.TripPoJo">
+        select lt.id,trip_name as tripName,address,level_name as levelName,phone,price,picImg1,picImg2
+        from l_trip lt
+        left join l_level le on le.id=lt.level_id
+    </select>
+</mapper>

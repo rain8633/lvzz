@@ -213,6 +213,7 @@ export default {
             this.vcUrl = this.path+"/user/verifyCode?time=" + new Date();
           }else if(res.data.code == 200){
                 window.sessionStorage.setItem("user",res.data.data);
+                // console.log(res.data.data);
                 this.$router.push('/home');
                this.$message.success("欢迎回来")
             }

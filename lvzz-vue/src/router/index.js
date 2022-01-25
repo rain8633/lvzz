@@ -2,6 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import Home from '../views/shouye/Home.vue'
 import Login from '../views/login/Login.vue'
+import TripList from '../views/shouye/TripList.vue'
+import TripDetail from '../views/shouye/TripDetail.vue'
 
 Vue.use(VueRouter)
 
@@ -23,7 +25,16 @@ const routes = [
     path: '/',
     name: 'Login',
     component: Login
-  }
+  },{
+    path:'/trip-list',
+    name:'TripList',
+    component: TripList
+  },
+  {
+      path: '/trip-detail/:id',
+      name: 'trip-detail',
+      component: TripDetail
+    },
 ]
 
 const router = new VueRouter({

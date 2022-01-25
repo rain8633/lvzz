@@ -7,4 +7,11 @@
         from l_trip lt
         left join l_level le on le.id=lt.level_id
     </select>
+
+    <select id="queryTripListByLevel" resultType="com.lvzz.demo.pojo.TripPoJo" parameterType="com.lvzz.demo.pojo.TripPoJo">
+        select lt.id,trip_name as tripName,address,level_name as levelName,phone,price,picImg1,picImg2
+        from l_trip lt
+        left join l_level le on le.id=lt.level_id
+        where le.level_name=#{levelName}
+    </select>
 </mapper>

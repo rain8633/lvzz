@@ -41,8 +41,8 @@ export default {
   },
   methods: {
      getTripList(){
-       this.$http.get('/trip/queryTripList').then(res=>{
-          this.tripsList[0].list = res.data.data.slice(0, 5)
+       this.$http.get('/trip/queryHotTripList').then(res=>{
+          this.tripsList[0].list = res.data.data.slice(0, 10)//slice使用于数组
 
        }).catch(err=>{
          console.log(err)

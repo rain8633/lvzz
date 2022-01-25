@@ -4,7 +4,8 @@ const configure = {
     loginIn: false, // 用户是否登录
     searchword: '', // 搜索关键词
     showAside: false, // 是否显示侧边栏
-    activeName: '', // 歌单类型名
+    activeName: '', // 类型名
+    tempList: {}, // 单个景点信息
     index: 0, // 列表中的序号
     isActive: false
   },
@@ -37,6 +38,13 @@ const configure = {
       }
       return showAside
     },
+     tempList: state => {
+      let tempList = state.tempList
+      if (JSON.stringify(tempList) === '{}') {
+        tempList = JSON.parse(window.sessionStorage.getItem('tempList') || null)
+      }
+      return tempList
+    },
     index: state => {
       let index = state.index
       if (!index) {
@@ -64,8 +72,13 @@ const configure = {
       window.sessionStorage.setItem('showAside', JSON.stringify(showAside))
     },
     setIndex: (state, index) => { state.index = index },
-    setSearchword: (state, searchword) => { state.searchword = searchword }
+    setSearchword: (state, searchword) => { state.searchword = searchword },
+     setTempList: (state, tempList) => {
+      state.tempList = tempList
+      window.sessionStorage.setItem('tempList', JSON.stringify(tempList))
+    },
   },
+
   actions: {}
 }
 

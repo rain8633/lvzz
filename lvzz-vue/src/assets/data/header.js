@@ -4,7 +4,7 @@ const navMsg = [{
   path: '/home'
 }, {
   name: '旅游景点',
-  path: '/trip'
+  path: '/trip-list'
 }, {
   name: '旅游路线',
   path: '/route'

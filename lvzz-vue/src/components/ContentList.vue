@@ -2,15 +2,10 @@
   <div class="content-list">
     <ul class="section-content">
       <li class="content-item" v-for="(item, index) in contentList" :key="index">
-        <div class="kuo" @click="goAblum(item, item.tripName)">
+        <div class="kuo" @click="goAblum(item)">
           <img class="item-img" :src="path+item.picImg1" alt="">
-          <!-- <div class="mask"  @click="goAblum(item, item.name)">
-            <svg class="icon" aria-hidden="true">
-              <use xlink:href="#icon-bofang"></use>
-            </svg>
-          </div> -->
         </div>
-        <p class="item-name">{{item.tripName || item.title}}</p>
+        <p class="item-name">{{item.tripName || item.title}}&nbsp;&nbsp;{{item.address}}</p>
       </li>
     </ul>
   </div>
@@ -26,13 +21,11 @@ export default {
     'contentList'
   ],
   methods: {
-    goAblum (item, type) {
-      // this.$store.commit('setTempList', item)
-      if (type) {
-        this.$router.push({path: `/singer-album/${item.id}`})
-      } else {
-        this.$router.push({path: `/song-list-album/${item.id}`})
-      }
+    goAblum (item) {
+        this.$store.commit('setTempList', item)
+
+        this.$router.push({path: `/trip-detail/${item.id}`})
+
     }
   }
 }

@@ -57,7 +57,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'loginIn'
+      'loginIn',
+      'activeName',
     ])
   },
   created () {
@@ -71,7 +72,7 @@ export default {
      this.user=user;
      this.$store.commit('setLoginIn', true);
     //  this.isLogin = true;
-     console.log(this.isLogin);
+    //  console.log(this.isLogin);
    }
   },
   mounted () {

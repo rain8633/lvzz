@@ -3,7 +3,7 @@
     <ul class="section-content">
       <li class="content-item" v-for="(item, index) in contentList" :key="index">
         <div class="kuo" @click="goAblum(item)">
-          <img class="item-img" :src="path+item.picImg1" alt="">
+          <img class="item-img" :src="path+item.picImg" alt="">
         </div>
         <p class="item-name">{{item.tripName || item.title}}&nbsp;&nbsp;{{item.address}}</p>
       </li>

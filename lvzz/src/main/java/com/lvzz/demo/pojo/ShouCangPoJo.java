@@ -7,13 +7,10 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class TripPoJo {
+public class ShouCangPoJo {
     private Integer id;
+    private Integer userId;
+    private Integer tripId;
     private String tripName;
     private String address;
-    private String levelName;
-    private String phone;
-    private Integer price;
-    private String picImg;
-    private String info;
 }

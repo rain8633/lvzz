@@ -4,6 +4,8 @@ import Home from '../views/shouye/Home.vue'
 import Login from '../views/login/Login.vue'
 import TripList from '../views/shouye/TripList.vue'
 import TripDetail from '../views/shouye/TripDetail.vue'
+import Route from '../views/shouye/Route.vue'
+import Setting from '../views/shouye/Setting.vue'
 
 Vue.use(VueRouter)
 
@@ -35,6 +37,15 @@ const routes = [
       name: 'trip-detail',
       component: TripDetail
     },
+    {
+      path:'/route',
+      name:'Route',
+      component:Route
+    },{
+      path:'/setting',
+      name:'Setting',
+      component: Setting
+    }
 ]
 
 const router = new VueRouter({

@@ -4,7 +4,7 @@
 .content-list {
   min-height: 500px;
   width:1200px;
-  padding: 0 0px;
+  padding: 0 10px;
   .section-content {
     @include layout(flex-start, stretch, row, wrap);
   }

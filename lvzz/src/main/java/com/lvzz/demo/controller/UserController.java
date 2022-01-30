@@ -106,5 +106,42 @@ public class UserController {
         }else return Result.success();
     }
 
+    @PostMapping("/queryUserById/{id}")
+    public Result queryUserById(@PathVariable("id") Integer id){
+        User user = userService.queryUserById(id);
+        return Result.success(user);
+    }
+
+    @GetMapping("/updateUserImg")
+    public Result updateUserImg(@RequestParam String pic,@RequestParam Integer id){
+         int i=userService.updateUserImg(pic,id);
+         if(i>0){
+             User user=userService.queryUserById(id);
+             return Result.success(user);
+         }
+         else return Result.error();
+    }
+
+    @PostMapping("/updateUserMsg")
+    public Result updateUserMsg(@RequestParam Integer id,@RequestParam String userName,@RequestParam String password,@RequestParam String phone){
+           String pass=userService.queryPasswordById(id);
+           if(pass == password){
+               int i=userService.updateUserMsg(id,userName,password,phone);
+               User user1=userService.queryUserById(id);
+               if(i>0){
+                   return Result.success(user1);
+               } else return Result.error();
+           }else {
+               String salt = MD5Util.md5Encrypt32Lower(password);
+               // 使用SimpleHash类对原始密码进行加密
+               String Pw = new SimpleHash("MD5", password, salt, 1024).toHex();
+               int i1 = userService.updateUserMsg(id, userName, Pw, phone);
+               User user1 = userService.queryUserById(id);
+               if (i1 > 0) {
+                   return Result.success(user1);
+               } else return Result.error();
+           }
+    }
+
 }
 

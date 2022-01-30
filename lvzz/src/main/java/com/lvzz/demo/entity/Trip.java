@@ -14,7 +14,7 @@ public class Trip {
     private Integer levelId;
     private String phone;
     private Integer price;
-    private String picImg1;
-    private String picImg2;
+    private String picImg;
+    private String info;
 
 }

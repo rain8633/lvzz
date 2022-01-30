@@ -67,7 +67,7 @@ export default {
     this.loginMsg = loginMsg
     this.menuList = menuList
     let user=JSON.parse(window.sessionStorage.getItem("user"));
-    console.log(user);
+    // console.log(user);
    if(user != null){
      this.user=user;
      this.$store.commit('setLoginIn', true);

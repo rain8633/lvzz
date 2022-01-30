@@ -6,6 +6,10 @@
         select * from l_user where user_name=#{userName} and password=#{password}
     </select>
 
+    <select id="queryUserById" parameterType="Integer" resultType="User">
+        select * from l_user where id=#{id}
+    </select>
+
     <select id="findByUsername" parameterType="String" resultType="User">
         select * from l_user where user_name=#{userName}
     </select>
@@ -17,4 +21,16 @@
     <insert id="addUser" parameterType="User" >
         insert into l_user(user_name,password,pic,salt,phone) values (#{userName},#{password},#{pic},#{salt},#{phone})
     </insert>
+
+    <update id="updateUserImg" parameterType="User">
+        update l_user set pic=#{pic} where id=#{userId}
+    </update>
+
+    <update id="updateUserMsg" parameterType="User">
+        update l_user set user_name=#{userName},password=#{password},phone=#{phone} where id=#{id}
+    </update>
+
+    <select id="queryPasswordById" parameterType="Integer" resultType="String">
+        select password from l_user where id=#{id}
+    </select>
 </mapper>

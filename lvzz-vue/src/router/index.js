@@ -6,6 +6,7 @@ import TripList from '../views/shouye/TripList.vue'
 import TripDetail from '../views/shouye/TripDetail.vue'
 import Route from '../views/shouye/Route.vue'
 import Setting from '../views/shouye/Setting.vue'
+import Riji from '../views/shouye/Riji.vue'
 
 Vue.use(VueRouter)
 
@@ -45,6 +46,10 @@ const routes = [
       path:'/setting',
       name:'Setting',
       component: Setting
+    },{
+      path:'/my-trip',
+      name:'Riji',
+      component: Riji
     }
 ]
 

@@ -29,7 +29,7 @@
 
 /*nav*/
 .navbar {
-  margin-top: 0px;
+  margin-top: -10px;
   height: $header-height;
   white-space: nowrap;
   li {
@@ -48,7 +48,7 @@
 
 /*搜索*/
 .header-search {
-  margin-top: 17px;
+  margin-top: 0px;
   @include layout;
   border-radius: $header-search-radius;
   overflow: hidden;

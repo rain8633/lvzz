@@ -10,9 +10,12 @@ import 'element-ui/lib/theme-chalk/index.css'
 import * as echarts from 'echarts'
 
 //引用
-// import 'summernote'
-// import 'bootstrap'
-// import 'popper.js'
+import 'summernote'
+import 'summernote/dist/summernote.css'
+import 'summernote/lang/summernote-zh-CN.js'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'popper.js'
 
 
 

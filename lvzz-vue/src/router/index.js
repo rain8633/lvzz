@@ -7,6 +7,8 @@ import TripDetail from '../views/shouye/TripDetail.vue'
 import Route from '../views/shouye/Route.vue'
 import Setting from '../views/shouye/Setting.vue'
 import Riji from '../views/shouye/Riji.vue'
+import AllRiJi from '../views/shouye/AllRiJi.vue'
+import AddRiJi from '../views/shouye/AddRiJi.vue'
 
 Vue.use(VueRouter)
 
@@ -49,7 +51,19 @@ const routes = [
     },{
       path:'/my-trip',
       name:'Riji',
-      component: Riji
+      component: Riji,
+       children:[
+      {
+      path: '/AllRiji',
+      name: 'AllRiji',
+      component: AllRiJi
+      },
+      {
+      path: '/AddRiji',
+      name: 'AddRiji',
+      component: AddRiJi
+      }
+    ]
     }
 ]
 
@@ -57,5 +71,10 @@ const router = new VueRouter({
   routes,
   mode:'history'
 })
+
+const originalPush = VueRouter.prototype.push
+   VueRouter.prototype.push = function push(location) {
+   return originalPush.call(this, location).catch(err => err)
+}
 
 export default router

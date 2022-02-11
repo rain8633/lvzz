@@ -4,11 +4,13 @@ import Home from '../views/shouye/Home.vue'
 import Login from '../views/login/Login.vue'
 import TripList from '../views/shouye/TripList.vue'
 import TripDetail from '../views/shouye/TripDetail.vue'
-import Route from '../views/shouye/Route.vue'
+import Route from '../views/shouye/Route2.vue'
 import Setting from '../views/shouye/Setting.vue'
 import Riji from '../views/shouye/Riji.vue'
 import AllRiJi from '../views/shouye/AllRiJi.vue'
 import AddRiJi from '../views/shouye/AddRiJi.vue'
+import RiJiDetail from '../views/shouye/RiJiDetail.vue'
+import ShouCang from '../views/shouye/ShouCang.vue'
 
 Vue.use(VueRouter)
 
@@ -62,8 +64,18 @@ const routes = [
       path: '/AddRiji',
       name: 'AddRiji',
       component: AddRiJi
-      }
+      },
     ]
+    },
+    {
+        path:'/rijiDetail',
+        name: 'RijiDetail',
+        component: RiJiDetail
+    },
+    {
+      path:'/shoucang',
+      name:'Shoucang',
+      component: ShouCang
     }
 ]
 

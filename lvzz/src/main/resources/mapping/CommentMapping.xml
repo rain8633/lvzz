@@ -8,4 +8,8 @@
     <insert id="addComment" parameterType="Comment">
         insert into l_comment(user_id,trip_id,create_time,content) values (#{userId},#{tripId},#{createTime},#{content})
     </insert>
+
+    <update id="setTripLike" parameterType="Integer">
+        update l_comment set up=#{up} where id=#{id}
+    </update>
 </mapper>

@@ -9,4 +9,6 @@ public interface CommentService {
     List<Comment> getAllComment(Integer tripId);
 
     int addComment(Comment comment);
+
+    int setTripLike(Integer id, Integer up);
 }

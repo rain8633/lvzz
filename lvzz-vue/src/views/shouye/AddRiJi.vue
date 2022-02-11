@@ -1,13 +1,21 @@
 <template>
      <div class="Riji" >
     <el-form ref="RiJiform" :model="RiJiform" label-width="80px">
-  <el-form-item label="日记内容">
+      <el-form-item label="标题" style="margin-left:-20px;">
+         <el-input  style="margin-left:20px;" v-model="RiJiform.title"></el-input>
+      </el-form-item>
+
+      <el-form-item label="天气/心情">
+        <el-rate style="margin-top:10px;" v-model="RiJiform.level" show-text allow-half></el-rate>
+      </el-form-item>
+
+     <el-form-item label="日记内容">
     <div id="summernote">
     </div>
   </el-form-item>
   <el-form-item>
-    <el-button type="primary" @click="tijiao()">发表游记</el-button>
-    <el-button>取消</el-button>
+    <el-button type="primary" @click="tijiao('RiJiform')">发表游记</el-button>
+    <el-button @click="resetForm('RiJiform')">取消</el-button>
   </el-form-item>
 </el-form>
   </div>
@@ -20,7 +28,8 @@ export default {
   data() {
     return {
       RiJiform:{
-
+         title:'',
+         level:''
        },
        userId:'',
        pic:'',
@@ -91,7 +100,7 @@ export default {
     //          $('#summernote').summernote('insertImage', res.data);
     //       })
     // },
-    tijiao(){
+    tijiao(formName){
        var text=$("#summernote").summernote('code')
       //  console.log(this.sliceStr(text));
 
@@ -102,6 +111,8 @@ export default {
           let result=this.sliceStr(text);
        let params= new URLSearchParams();
       params.append("userId",this.userId);
+      params.append("title",this.RiJiform.title);
+      params.append("feelScore",this.RiJiform.level*2);
       params.append("content",text);
       // console.log(this.pic)
       if(result.length>1){
@@ -112,7 +123,9 @@ export default {
       this.$http.post('/RiJi/AddRiJi',params).then(res=>{
          if(res.data.code==200){
              this.$message.success("发表成功!")
-             $('#summernote').summernote('code','');
+            //  $('#summernote').summernote('code','');
+            //   this.$refs[formName].resetFields();
+            this.resetForm(formName)
             //  $('#summernote').code('')
 
          }else{
@@ -123,6 +136,11 @@ export default {
         })
     }
     },
+     resetForm(formName) {
+        this.RiJiform.title='',
+        this.RiJiform.level='',
+          $('#summernote').summernote('code','');
+      },
     sliceStr(str) {
 		let result = [];
 		// 提取url的正则

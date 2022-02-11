@@ -6,10 +6,7 @@ import com.lvzz.demo.pojo.CommentPoJo;
 import com.lvzz.demo.service.CommentService;
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.Date;
 import java.util.List;
@@ -37,5 +34,14 @@ public class CommentController {
         }
         else return Result.error();
 
+    }
+
+    @PostMapping("/setTripLike")
+    public Result setTripLike(@RequestParam Integer id, @RequestParam Integer up){
+        int i = commentService.setTripLike(id,up);
+        if(i>0){
+            return Result.success();
+        }
+        else return Result.error();
     }
 }

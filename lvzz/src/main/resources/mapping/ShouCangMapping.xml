@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvzz.demo.mapper.ShouCangMapper">
+
+    <select id="queryMyShouCang" parameterType="Integer" resultType="com.lvzz.demo.pojo.TripPoJo">
+         select lt.id as id ,trip_name,address,level_name,phone,price,picImg,info from l_shoucang ls
+        left join l_trip lt on ls.trip_id=lt.id
+        left join l_level le on le.id=lt.level_id
+        where ls.user_id=#{userId}
+    </select>
+
+    <select id="isShoucang" parameterType="Integer" resultType="Integer">
+        select trip_id from l_shoucang where user_id=#{userId}
+    </select>
+
+
+    <insert id="addShouCang" parameterType="Integer">
+        insert into l_shoucang(user_id,trip_id) values (#{userId},#{id})
+    </insert>
+
+    <delete id="deleteShouCang" parameterType="Integer">
+         delete from l_shoucang where trip_id=#{tripId} and user_id=#{userId}
+    </delete>
+</mapper>

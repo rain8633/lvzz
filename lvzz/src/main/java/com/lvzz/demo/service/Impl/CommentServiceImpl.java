@@ -24,4 +24,9 @@ public class CommentServiceImpl implements CommentService {
     public int addComment(Comment comment) {
         return commentMapper.addComment(comment);
     }
+
+    @Override
+    public int setTripLike(Integer id, Integer up) {
+        return commentMapper.setTripLike(id,up);
+    }
 }

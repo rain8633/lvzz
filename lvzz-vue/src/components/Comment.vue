@@ -36,6 +36,9 @@
           <!-- <div class="icon" :visible="cancledianzanVisible">
              <img :src="require('../assets/img/zan2.png')" >
           </div> -->
+          <svg class="icon" aria-hidden="true">
+            <use xlink:href="#icon-zan"></use>
+          </svg>
           {{item.up}}
         </div>
       </li>
@@ -137,9 +140,8 @@ export default {
         let params = new URLSearchParams()
         params.append('id', id)
         params.append('up', up + 1)
-        setLike(params)
-          .then(res => {
-            if (res.code === 1) {
+        this.$http.post('/comment/setTripLike',params).then(res => {
+            if (res.data.code === 200) {
               this.$refs.up[index].children[0].style.color = '#2796dd'
               this.getAllComment()
             }

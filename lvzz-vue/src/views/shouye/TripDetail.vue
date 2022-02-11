@@ -38,7 +38,8 @@
         </div>
       </div>
           <div style="margin-top:30px;">
-          <el-button type="primary" @click="shoucang()">收藏</el-button>
+          <el-button v-if="trip.shoucang == false" type="primary" @click="addshoucang(trip.id)">收藏</el-button>
+          <el-button v-if="trip.shoucang == true" type="primary" disabled>已收藏</el-button>
           <el-button type="success" @click="buy()">前往购票</el-button>
           </div>
       <!--评论-->
@@ -127,7 +128,22 @@ export default {
       }).catch(err => {
         console.log(err)
       })
+    },
+    addshoucang(id){
+       if(this.loginIn){
+      let userId=JSON.parse(window.sessionStorage.getItem("user")).id;
+       this.$http.post('/shouCang/addShouCang/'+userId+'/'+id).then(res => {
+         if(res.data.code == 200) {
+              this.$message.success("收藏成功!")
+              this.trip.shoucang=true
+         }else{
+            this.$message.error("收藏失败!")
+         }
+       })
+    }else{
+      this.notify("请先登录",'warning');
     }
+  }
   }
 }
 </script>

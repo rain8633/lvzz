@@ -3,9 +3,34 @@
 <mapper namespace="com.lvzz.demo.mapper.TripMapper">
 
     <select id="querytripList" resultType="com.lvzz.demo.pojo.TripPoJo">
-        select lt.id,trip_name as tripName,address,level_name as levelName,phone,price,picImg,info
+        select lt.id as id,trip_name as tripName,address,level_name as levelName,phone,price,picImg,info
         from l_trip lt
         left join l_level le on le.id=lt.level_id
+
+    </select>
+
+    <select id="queryAllTrip" resultType="com.lvzz.demo.pojo.TripPoJo" parameterType="com.lvzz.demo.pojo.TripPoJo">
+        select lt.id as id,trip_name as tripName,address,level_name as levelName,phone,price,picImg,info
+        from l_trip lt
+        left join l_level le on le.id=lt.level_id
+        <where>
+            <if test="tripName != null and tripName != ''">
+                and trip_name like concat('%',#{tripName},'%')
+            </if>
+            <if test="min != null and min != ''">
+                and price &gt;= #{min}
+            </if>
+
+            <if test="max != null and max != ''">
+                and  price &lt;= #{max}
+            </if>
+            <if test="address != null and address != ''">
+                and address like concat('%',#{address},'%')
+            </if>
+            <if test="levelName != null and levelName != ''">
+                and le.level_name = #{levelName}
+            </if>
+        </where>
     </select>
 
     <select id="queryTripListByLevel" resultType="com.lvzz.demo.pojo.TripPoJo" parameterType="com.lvzz.demo.pojo.TripPoJo">
@@ -14,4 +39,20 @@
         left join l_level le on le.id=lt.level_id
         where le.level_name=#{levelName}
     </select>
+
+    <select id="queryTripById" parameterType="Integer" resultType="com.lvzz.demo.pojo.TripPoJo">
+            select lt.id as id,trip_name as tripName,address,level_id,level_name as levelName,phone,price,picImg,info
+        from l_trip lt
+        left join l_level le on le.id=lt.level_id
+        where lt.id=#{tripId}
+    </select>
+
+    <update id="updateTripById" parameterType="com.lvzz.demo.pojo.TripPoJo">
+        update l_trip set trip_name=#{tripName},address=#{address},level_id=#{levelId},phone=#{phone},
+        price=#{price},picImg=#{picImg},info=#{info} where id=#{id}
+    </update>
+
+    <insert id="addTrip" parameterType="Trip">
+        insert into l_trip(trip_name,address,level_id,phone,price,picImg,info) values (#{tripName},#{address},#{levelId},#{phone},#{price},#{picImg},#{info})
+    </insert>
 </mapper>

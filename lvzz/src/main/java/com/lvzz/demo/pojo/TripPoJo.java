@@ -11,9 +11,13 @@ public class TripPoJo {
     private Integer id;
     private String tripName;
     private String address;
+    private Integer levelId;
     private String levelName;
     private String phone;
     private Integer price;
     private String picImg;
     private String info;
+    private Integer min;
+    private Integer max;
+    private boolean shoucang;
 }

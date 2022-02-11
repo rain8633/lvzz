@@ -3,6 +3,36 @@
 <mapper namespace="com.lvzz.demo.mapper.RiJiMapper">
 
     <insert id="AddRiJi" parameterType="RiJi">
-        insert into l_riji(user_id,content,pic,create_time,url) values (#{userId},#{content},#{pic},#{createTime},#{url})
+        insert into l_riji(user_id,title,feel_score,content,pic,create_time,url) values (#{userId},#{title},#{feelScore},#{content},#{pic},#{createTime},#{url})
     </insert>
+
+    <select id="queryRiJiList" resultType="RiJi">
+        select * from l_riji where user_id=#{userId}
+
+        <if test="content != null and content != ''">
+            and title like concat('%',#{content},'%') or content like concat('%',#{content},'%')
+        </if>
+        <if test="createTime != null and createTime != '' and createTime !='null' ">
+            and create_time = #{createTime}
+        </if>
+
+    </select>
+
+    <select id="queryRiJiDetail" resultType="RiJi" parameterType="Integer">
+        select * from l_riji where id=#{id}
+    </select>
+
+    <update id="updateRiJi" parameterType="RiJi">
+        update l_riji set title=#{title},feel_score=#{feelScore},content=#{content},pic=#{pic},url=#{url}
+        where id=#{id} and user_id=#{userId}
+    </update>
+
+    <delete id="deleterijiById" parameterType="Integer">
+        delete from l_riji where id=#{id} and user_id=#{userId}
+    </delete>
+
+    <select id="queryAllUserRiJi" resultType="com.lvzz.demo.pojo.RiJiPoJo">
+        select lr.id as id,lu.user_name as userName,title,feel_score,content,lr.pic as pic,create_time,url from l_riji lr
+        left join l_user lu on lu.id = lr.user_id
+    </select>
 </mapper>

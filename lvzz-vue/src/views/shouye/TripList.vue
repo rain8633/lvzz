@@ -45,7 +45,8 @@ export default {
       activeName: '全部景点',
       pageSize: 10, // 页数
       currentPage: 1, // 当前页
-      total:0
+      total:0,
+      userId:''
     }
   },
   components: {
@@ -56,7 +57,8 @@ export default {
   },
   computed: {
     ...mapGetters([
-      'songsList'
+      'songsList',
+      'loginIn'
     ]),
     // 计算当前表格中的数据
     data () {
@@ -64,6 +66,11 @@ export default {
     }
   },
   mounted () {
+
+    let user = JSON.parse(window.sessionStorage.getItem("user"))
+    if(user != null){
+       this.userId = user.id
+    }
     this.tripLevel=tripLevel
     this.handleChangeView('全部景点')
   },
@@ -85,7 +92,10 @@ export default {
     },
     // 获取全部景点
     getTripList () {
-      this.$http.get("/trip/queryTripList",{params:{
+
+    if(this.loginIn){
+     this.$http.get("/trip/queryTripList",{params:{
+           userId:this.userId,
            pageSize:this.pageSize,
            pageNum:this.currentPage}})
         .then(res => {
@@ -99,9 +109,41 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    }else{
+      this.$http.get("/trip/queryAllTrip",{params:{
+           pageSize:this.pageSize,
+           pageNum:this.currentPage}})
+        .then(res => {
+          this.currentPage = res.data.data.pageNum
+          this.tripList = res.data.data.rows
+          // console.log(this.tripList)
+          this.total=res.data.data.total
+          // console.log(this.total)
+          //  this.pageNum=res.data.data.pageNum
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }
     },
     // 通过类别获取景点
     getTripListBylevel(name) {
+
+     if(this.loginIn){
+      this.$http.get("/trip/queryUserTripListByLevel",{params:{
+           userId:this.userId,
+           pageSize:this.pageSize,
+           pageNum:this.currentPage,
+           levelName:name
+     }}).then(res => {
+          this.currentPage = res.data.data.pageNum
+          this.tripList = res.data.data.rows
+          this.total=res.data.data.total
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    }else{
      this.$http.get("/trip/queryTripListByLevel",{params:{
        pageSize:this.pageSize,
            pageNum:this.currentPage,
@@ -114,6 +156,7 @@ export default {
         .catch(err => {
           console.log(err)
         })
+    }
     }
   }
 }

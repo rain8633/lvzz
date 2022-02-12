@@ -17,13 +17,17 @@
       label="姓名"
       prop="userName">
     </el-table-column>
-    <el-table-column
+     <el-table-column
+      label="联系方式"
+      prop="phone">
+    </el-table-column>
+    <!-- <el-table-column
       label="权限"
       prop="role">
       <template slot-scope="scope">
         {{scope.row.role==1 ? '超级管理员' : '普通用户'}}
       </template>
-    </el-table-column>
+    </el-table-column> -->
     <el-table-column
       align="right">
       <template slot="header" slot-scope="scope">
@@ -33,9 +37,9 @@
           placeholder="输入关键字搜索"/>
       </template>
       <template slot-scope="scope">
-        <el-button
+        <!-- <el-button
           size="mini"
-          @click="handleupdate(scope.$index, scope.row)">授权</el-button>
+          @click="handleupdate(scope.$index, scope.row)">授权</el-button> -->
         <el-button
           size="mini"
           type="danger"
@@ -60,25 +64,16 @@ export default {
 
   },
   methods:{
-    handleupdate(index, row) {//修改用户权限
-             if(row.role==0){
-         this.$http.post('/user/updateRole/'+row.id).then(res=>{
-            if(res.data.code==200){
-                this.$message.success("授权成功")
-                this.queryAllUser()
-            }
-            else{
-              this.$message.error("修改失败!")
-            }
-         })
-    }else{
-       this.$message.error("该用户已经是管理员！")
-    }
-      },
+
       handleDelete(index, row) {//删除
 
-        let userId=JSON.parse(window.sessionStorage.getItem("user")).id
-        this.$http.post('/user/deleteUser/'+row.id).then(res=>{
+      this.$confirm('是否删除用户?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(()=>{
+        // let userId=JSON.parse(window.sessionStorage.getItem("user")).id
+        this.$http.delete('/user/deleteUser/'+row.id).then(res=>{
             if(res.data.code==200){
                 this.$message.success("删除成功")
                 this.queryAllUser()
@@ -86,6 +81,7 @@ export default {
               this.$message.error("删除失败!")
             }
          })
+      })
       },
      queryAllUser(){
        this.$http.get('/user/queryAllUser').then(res=>{

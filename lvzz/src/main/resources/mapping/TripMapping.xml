@@ -55,4 +55,8 @@
     <insert id="addTrip" parameterType="Trip">
         insert into l_trip(trip_name,address,level_id,phone,price,picImg,info) values (#{tripName},#{address},#{levelId},#{phone},#{price},#{picImg},#{info})
     </insert>
+
+    <delete id="deleteTripById" parameterType="Integer">
+        delete from l_trip where id=#{id}
+    </delete>
 </mapper>

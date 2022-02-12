@@ -3,10 +3,13 @@ package com.lvzz.demo.controller;
 
 import com.lvzz.demo.entity.Page;
 import com.lvzz.demo.entity.Result;
+import com.lvzz.demo.entity.TongJi;
 import com.lvzz.demo.pojo.TripPoJo;
 import com.lvzz.demo.service.ShouCangService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/shouCang")
@@ -40,5 +43,14 @@ public class ShouCangController {
             return Result.success();
         }
         else return Result.error();
+    }
+
+    @PostMapping("/tongji")
+    public Result tongji(){
+        List<TongJi> tongJiList=shouCangService.queryScInfo();
+        if(tongJiList!=null){
+            return Result.success(tongJiList);
+        }
+        return Result.error();
     }
 }

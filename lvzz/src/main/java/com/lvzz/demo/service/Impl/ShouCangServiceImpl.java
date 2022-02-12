@@ -3,6 +3,7 @@ package com.lvzz.demo.service.Impl;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.lvzz.demo.entity.Page;
+import com.lvzz.demo.entity.TongJi;
 import com.lvzz.demo.mapper.ShouCangMapper;
 import com.lvzz.demo.pojo.TripPoJo;
 import com.lvzz.demo.service.ShouCangService;
@@ -38,5 +39,10 @@ public class ShouCangServiceImpl implements ShouCangService {
     @Override
     public int deleteShouCang(Integer userId, Integer tripId) {
         return shouCangMapper.deleteShouCang(userId, tripId);
+    }
+
+    @Override
+    public List<TongJi> queryScInfo() {
+        return shouCangMapper.queryScInfo();
     }
 }

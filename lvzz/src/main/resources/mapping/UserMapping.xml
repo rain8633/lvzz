@@ -33,4 +33,12 @@
     <select id="queryPasswordById" parameterType="Integer" resultType="String">
         select password from l_user where id=#{id}
     </select>
+
+    <select id="queryAllUser" resultType="User">
+        select * from l_user
+    </select>
+
+    <delete id="deleteUserById" parameterType="Integer">
+       delete from l_user where id=#{id}
+    </delete>
 </mapper>

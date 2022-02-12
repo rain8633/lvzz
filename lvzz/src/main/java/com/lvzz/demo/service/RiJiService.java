@@ -12,7 +12,7 @@ public interface RiJiService {
 
     Page<RiJi> queryAllRiJi(Integer userId, String content, String createTime, Integer pageSize, Integer pageNum);
 
-    RiJi queryRiJiDetail(Integer id);
+    RiJiPoJo queryRiJiDetail(Integer id);
 
     int updateRiJi(RiJi riJi);
 

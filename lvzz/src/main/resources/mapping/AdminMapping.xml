@@ -13,4 +13,12 @@
     <select id="queryAdmin" parameterType="String" resultType="Admin">
         select * from l_admin where name = #{name} and password = #{password}
     </select>
+
+    <update id="updatePassword">
+        update l_admin set password=#{newPassword} where id=#{userId}
+    </update>
+
+    <update id="updatePic">
+     update l_admin set pic=#{pic} where id=#{userId}
+    </update>
 </mapper>

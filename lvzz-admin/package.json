@@ -1,5 +1,5 @@
 {
-  "name": "fangyuan",
+  "name": "lvzz-admin",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -10,6 +10,7 @@
     "core-js": "^3.6.5",
     "echarts": "^5.1.2",
     "vue": "^2.6.11",
+    "jquery": "^3.5.1",
     "vue-router": "^3.2.0",
     "vuex": "^3.6.2"
   },
@@ -19,6 +20,10 @@
     "@vue/cli-plugin-vuex": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "axios": "^0.21.1",
+    "bootstrap": "4.5.0",
+    "jquery": "3.5.1",
+    "popper.js": "^1.16.1",
+    "summernote": "0.8.18",
     "element-ui": "^2.15.2",
     "vue-particles": "^1.0.9",
     "vue-template-compiler": "^2.6.11"

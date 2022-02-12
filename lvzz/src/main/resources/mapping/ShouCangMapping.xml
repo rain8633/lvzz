@@ -21,4 +21,10 @@
     <delete id="deleteShouCang" parameterType="Integer">
          delete from l_shoucang where trip_id=#{tripId} and user_id=#{userId}
     </delete>
+
+
+    <select id="queryScInfo" resultType="TongJi">
+        select count(user_id) as value, lt.trip_name as name from l_shoucang ls,l_trip lt where ls.trip_id=lt.id GROUP BY ls.trip_id
+    </select>
+
 </mapper>

@@ -18,8 +18,9 @@
 
     </select>
 
-    <select id="queryRiJiDetail" resultType="RiJi" parameterType="Integer">
-        select * from l_riji where id=#{id}
+    <select id="queryRiJiDetail" resultType="com.lvzz.demo.pojo.RiJiPoJo" parameterType="Integer">
+        select lr.id as id,title,lu.user_name as userName,feel_score,content,lr.pic as pic,create_time,url
+         from l_riji lr,l_user lu where lr.id=#{id} and lr.user_id = lu.id
     </select>
 
     <update id="updateRiJi" parameterType="RiJi">
@@ -32,7 +33,7 @@
     </delete>
 
     <select id="queryAllUserRiJi" resultType="com.lvzz.demo.pojo.RiJiPoJo">
-        select lr.id as id,lu.user_name as userName,title,feel_score,content,lr.pic as pic,create_time,url from l_riji lr
+        select lr.id as id,lr.user_id,lu.user_name as userName,title,feel_score,content,lr.pic as pic,create_time,url from l_riji lr
         left join l_user lu on lu.id = lr.user_id
     </select>
 </mapper>

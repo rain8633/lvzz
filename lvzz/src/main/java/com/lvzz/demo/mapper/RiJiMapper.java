@@ -13,7 +13,7 @@ public interface RiJiMapper {
 
     List<RiJi> queryRiJiList(Integer userId, String content, String createTime);
 
-    RiJi queryRiJiDetail(Integer id);
+    RiJiPoJo queryRiJiDetail(Integer id);
 
     int updateRiJi(RiJi riJi);
 

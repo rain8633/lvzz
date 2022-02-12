@@ -19,4 +19,6 @@ public interface TripMapper {
     int updateTripById(TripPoJo tripPoJo);
 
     int addTrip(Trip trip);
+
+    int deleteTripById(Integer id);
 }

@@ -20,6 +20,11 @@
       label="标题"
       width="180">
     </el-table-column>
+       <el-table-column
+      prop="userName"
+      label="作者"
+      width="180">
+    </el-table-column>
     <el-table-column
       prop="feelScore"
       label="心情/天气"
@@ -53,7 +58,11 @@
   :visible.sync="table"
   direction="rtl"
   size="40%">
+
    <el-form ref="RiJiform" :model="RiJiform" label-width="80px">
+     <el-form-item label="作者" style="margin-left:-20px;">
+         <el-input  style="margin-left:20px;"  v-model="RiJiform.userName"></el-input>
+      </el-form-item>
       <el-form-item label="标题" style="margin-left:-20px;">
          <el-input  style="margin-left:20px;"  v-model="RiJiform.title"></el-input>
       </el-form-item>
@@ -87,15 +96,17 @@
   </div>
 </template>
 
-<script type="text/javascript">
+<script>
 import $ from 'jquery';
+
 export default {
   name:"AllRiJi",
   data() {
     return {
         tableData: [],
         riji:{
-           content:'',
+          userName:'',
+             content:'',
              createTime: '',
              feelScore:'',
              id:'',
@@ -105,6 +116,7 @@ export default {
              userId:'',
         },
         RiJiform:{
+          userName:'',
            title:'',
            level:''
         },
@@ -142,10 +154,11 @@ export default {
          this.$http.post('/RiJi/queryRiJiDetail/'+id).then(res => {
              if(res.data.code == 200){
                  this.riji = res.data.data;
-                 this.riji.feelScore = res.data.data.feelScore / 2;
+                 this.riji.feelScore = res.data.data.feelScore / 2
              }
              this.RiJiform.title = this.riji.title
              this.RiJiform.level = this.riji.feelScore
+             this.RiJiform.userName = this.riji.userName
              this.summernote()
            $('#summernote').summernote('code',this.riji.url);
            }).catch(err => {
@@ -165,7 +178,6 @@ export default {
              ['insert',['picture']]
          ],
           callbacks: {
-
             onChange: function(contents, $editable) {
             var text = $('<div>'+contents+'</div>').text();
              },
@@ -202,6 +214,10 @@ export default {
              this.tableData = res.data.data.rows
              this.total=res.data.data.total
            this.currentPage=res.data.data.pageNum
+            for(let item in this.tableData){
+              this.tableData[item].feelScore =  this.tableData[item].feelScore / 2
+              //  item.feelScore = item.feelScore / 2
+            }
           }
         }).catch(err => {
           console.log(err)
@@ -209,6 +225,29 @@ export default {
       },
     cancle(){
       this.table = false;
+    },
+    deleteriji(row){
+      this.$confirm('是否删除日记?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(()=>{
+        // console.log(row.id)
+        // console.log(this.userId)
+         this.$http.get('/RiJi/deleterijiById',{params:{
+              id: row.id,
+              userId:row.userId
+         }}).then(res => {
+            if(res.data.code == 200){
+                this.$message.success("删除成功!")
+                this.queryAllRiJi()
+            }else{
+              this.$message.error("删除失败!请稍后重试")
+            }
+         }).catch(err => {
+           console.error(err)
+         })
+    })
     }
   },
 

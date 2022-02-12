@@ -5,8 +5,8 @@
     <h2>添加景区</h2>
   </div>
   <el-form :model="addTripForm" :rules="addTripRules" ref="addTripForm" label-width="100px" class="demo-addTripForm">
-  <el-form-item label="景区名称" prop="TripName">
-    <el-input v-model="addTripForm.TripName"></el-input>
+  <el-form-item label="景区名称" prop="tripName">
+    <el-input v-model="addTripForm.tripName"></el-input>
   </el-form-item>
   <el-form-item label="门票价格" prop="price">
     <el-input type="number" v-model="addTripForm.price">
@@ -17,7 +17,7 @@
   <el-form-item prop="levelId" label="景区类别">
          <el-select v-model="addTripForm.levelId" clearable placeholder="请选择景区类别" style="width:150px;">
     <el-option
-      v-for="item in tripLevel"
+      v-for="item in tripList"
       :key="item.value"
       :label="item.name"
       :value="item.level">
@@ -61,13 +61,13 @@
 
 <script type="text/javascript">
 
-import {cities} from '../../assets/data/form'
+import {tripLevel} from '../../assets/data/tripList'
 export default {
   name:"AddTrip",
   data() {
     return {
       addTripForm:{
-          TripName: '',
+          tripName: '',
           price: '',
           phone:'',
           levelId:'',
@@ -76,9 +76,9 @@ export default {
           picImg: '',
           info:''
       },
-      cities:[],
+      tripList:[],
       addTripRules:{
-           TripName: [
+           tripName: [
             { required: true, message: '景区名不能为空', trigger: 'blur' },
           ],
            price: [
@@ -153,7 +153,7 @@ export default {
     // },
   },
   created(){
-    this.cities = cities
+    this.tripList = tripLevel
   }
 }
 </script>

@@ -102,5 +102,10 @@ public class TripServiceImpl implements TripService {
         return tripMapper.addTrip(trip);
     }
 
+    @Override
+    public int deleteTripById(Integer id) {
+        return tripMapper.deleteTripById(id);
+    }
+
 
 }

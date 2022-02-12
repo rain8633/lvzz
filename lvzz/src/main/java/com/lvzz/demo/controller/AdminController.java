@@ -64,6 +64,21 @@ public class AdminController {
         }else return Result.success();
     }
 
+    @PostMapping("/updatePassword")
+    public Result updatePassword(@RequestParam String newPassword,@RequestParam Integer userId){
+         int i = adminService.updatePassword(newPassword,userId);
+        if(i>0){
+            return Result.success();
+        }else return Result.error();
+    }
+
+    @PostMapping("/updatePic")
+    public Result updatePic(@RequestParam String pic,@RequestParam Integer userId){
+        int i= adminService.updatePic(pic,userId);
+        if(i>0){
+            return Result.success();
+        }else return Result.error();
+    }
 
     @PostMapping("/upload")
     public Result upload(MultipartFile file) throws IOException {

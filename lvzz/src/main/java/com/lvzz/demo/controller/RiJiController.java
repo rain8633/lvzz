@@ -78,7 +78,7 @@ public class RiJiController {
 
    @PostMapping("/queryRiJiDetail/{id}")
    public Result queryRiJiDetail(@PathVariable("id") Integer id){
-        RiJi riJi = riJiService.queryRiJiDetail(id);
+        RiJiPoJo riJi = riJiService.queryRiJiDetail(id);
         if(riJi!=null){
             return Result.success(riJi);
         }

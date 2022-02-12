@@ -26,4 +26,6 @@ public interface TripService {
     int updateTripById(TripPoJo tripPoJo);
 
     int addTrip(Trip trip);
+
+    int deleteTripById(Integer id);
 }

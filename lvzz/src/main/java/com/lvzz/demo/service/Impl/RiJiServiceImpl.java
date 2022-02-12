@@ -35,7 +35,7 @@ public class RiJiServiceImpl implements RiJiService {
     }
 
     @Override
-    public RiJi queryRiJiDetail(Integer id) {
+    public RiJiPoJo queryRiJiDetail(Integer id) {
         return riJiMapper.queryRiJiDetail(id);
     }
 

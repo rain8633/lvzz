@@ -110,4 +110,13 @@ public class TripController {
         return Result.success("/pics/"+newName);
     }
 
+    @PostMapping("/deleteTripById/{id}")
+    public Result deleteTripById(@PathVariable("id") Integer id){
+        int i = tripService.deleteTripById(id);
+        if(i>0){
+            return Result.success();
+        }
+        else return Result.error();
+    }
+
 }

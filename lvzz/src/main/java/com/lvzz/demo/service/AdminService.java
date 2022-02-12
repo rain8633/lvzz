@@ -9,4 +9,8 @@ public interface AdminService {
     int addAdmin(Admin admin);
 
     Admin queryAdmin(String name, String password);
+
+    int updatePassword(String newPassword, Integer userId);
+
+    int updatePic(String pic, Integer userId);
 }

@@ -26,4 +26,14 @@ public class AdminServiceImpl implements AdminService {
     public Admin queryAdmin(String name, String password) {
         return adminMapper.queryAdmin(name,password);
     }
+
+    @Override
+    public int updatePassword(String newPassword, Integer userId) {
+        return adminMapper.updatePassword(newPassword,userId);
+    }
+
+    @Override
+    public int updatePic(String pic, Integer userId) {
+        return adminMapper.updatePassword(pic, userId);
+    }
 }

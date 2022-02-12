@@ -9,9 +9,9 @@
     </ul>
       <el-row :gutter="22">
   <el-col style="margin-left:48px;" :span="5" v-for="(item, index) in shoucangList" :key="index">
-    <div @click="goAblum(item)">
+    <div>
     <el-card :body-style="{ padding: '0px' }">
-      <img :src="path+item.picImg" class="image">
+      <img :src="path+item.picImg" class="image" @click="goAblum(item)">
       <div style="padding: 14px;">
         <span>{{item.tripName}}</span>
         <span>&nbsp;&nbsp;{{item.address}}</span>
@@ -97,6 +97,11 @@ export default {
 
     },
     deleteShouCang(id) {
+      this.$confirm('是否取消收藏?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        }).then(()=>{
        this.$http.delete('/shouCang/deleteShouCang',{params:{
          userId:this.userId,
          tripId:id
@@ -110,6 +115,7 @@ export default {
        }).catch(err => {
          console.error(err)
        })
+    })
     }
   }
 }

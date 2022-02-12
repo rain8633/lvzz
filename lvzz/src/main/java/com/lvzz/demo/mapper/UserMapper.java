@@ -2,6 +2,8 @@ package com.lvzz.demo.mapper;
 
 import com.lvzz.demo.entity.User;
 
+import java.util.List;
+
 public interface UserMapper {
 
        User queryUser(String userName,String password);
@@ -19,4 +21,8 @@ public interface UserMapper {
        int updateUserMsg(Integer id, String userName, String password, String phone);
 
        String queryPasswordById(Integer id);
+
+       List<User> queryAllUser();
+
+       int deleteUserById(Integer id);
 }

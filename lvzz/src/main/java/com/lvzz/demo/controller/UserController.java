@@ -22,6 +22,7 @@ import javax.servlet.http.HttpSession;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -56,6 +57,22 @@ public class UserController {
 //                    return Result.success(userInfo);
 //                } else return Result.error();
         }
+
+        @GetMapping("/queryAllUser")
+        public Result queryAllUser(){
+            List<User> userList = userService.queryAllUser();
+            if(userList!=null){
+                return Result.success(userList);
+            }else return Result.error();
+        }
+    @DeleteMapping("/deleteUser/{id}")
+    public Result deleteUser(@PathVariable("id") Integer id){
+            int i = userService.deleteUserById(id);
+            if(i>0){
+                return Result.success();
+            }
+            else return Result.error();
+    }
 
     @PostMapping("/upload")
     public Result upload(MultipartFile file) throws IOException {

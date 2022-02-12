@@ -2,7 +2,7 @@
   <div class="Statistics">
   <el-card class="box-card">
   <div>
-    <h2>房源收藏统计</h2>
+    <h2>景区收藏统计</h2>
   </div>
   <div id="myChart" :style="{width: '700px', height: '700px'}"></div>
   </el-card>
@@ -21,7 +21,7 @@ export default {
 
   },
   mounted(){
-  this.$http.post('/house/tongji').then(res=>{
+  this.$http.post('/shouCang/tongji').then(res=>{
 
         let myChart = this.$echarts.init(document.getElementById('myChart'))
         // 绘制图表
@@ -29,7 +29,7 @@ export default {
             backgroundColor: 'white',
 
     title: {
-        text: '房源收藏信息统计',
+        text: '景区收藏信息统计',
         left: 'center'
     },
     tooltip: {

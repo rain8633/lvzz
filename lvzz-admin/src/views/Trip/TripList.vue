@@ -1,5 +1,5 @@
 <template>
-  <div class="HouseList">
+  <div class="TripList">
 
   <!-- 编辑景点信息 -->
    <el-dialog title="编辑景点信息" :visible.sync="editTripFormVisible" @closed="editClose()">
@@ -35,7 +35,7 @@
   type="textarea"
   placeholder="请输入内容"
   v-model="editTripForm.info"
-  maxlength="30"
+  maxlength="200"
   show-word-limit
 ></el-input>
   </el-form-item>
@@ -54,7 +54,7 @@
     </el-form-item>
 
   <el-form-item>
-    <el-button type="primary" @click="updateHouse('editTripForm')">确认修改</el-button>
+    <el-button type="primary" @click="updateTrip('editTripForm')">确认修改</el-button>
     <el-button @click="editTripFormVisible=false">取消</el-button>
   </el-form-item>
 </el-form>
@@ -106,7 +106,7 @@
          </el-col>
 
          <el-col :span="4">
-      <el-button type="primary" @click="queryHouse()">查询</el-button>
+      <el-button type="primary" @click="queryTrip()">查询</el-button>
       <el-button type="warning" @click="resetForm()">重置</el-button>
     </el-col>
        </el-row>
@@ -123,8 +123,8 @@
         <div class="bottom clearfix">
           <!-- <time class="time">{{ trip.publishTime }}</time><br> -->
           <el-row :gutter="20">
-          <el-col :span="4"> <el-button type="text" class="button" style="color:blue" @click="editHouse(trip.id)">编辑</el-button></el-col>
-          <el-col :span="4"> <el-button type="text" class="button" style="color:red" @click="deleteHouse(trip.id)">删除</el-button> </el-col>
+          <el-col :span="4"> <el-button type="text" class="button" style="color:blue" @click="editTrip(trip.id)">编辑</el-button></el-col>
+          <el-col :span="4"> <el-button type="text" class="button" style="color:red" @click="deleteTrip(trip.id)">删除</el-button> </el-col>
         </el-row>
         </div>
       </div>
@@ -222,10 +222,10 @@ export default {
         max:'',
         address:''
       },
-      this.queryHouse()
+      this.queryTrip()
     },
 
-    queryHouse(){
+    queryTrip(){
      this.$http.get('/trip/queryAllTrip',{params:{
        pageSize:this.pageSize,
        pageNum:this.pageNum,
@@ -244,14 +244,14 @@ export default {
     },
     handleSizeChange(pageSize){
        this.pageSize=pageSize
-       this.queryHouse()
+       this.queryTrip()
     },
     handleCurrentChange(pageNum){
       this.pageNum=pageNum
-      this.queryHouse()
+      this.queryTrip()
     },
 
-    editHouse(tripId){
+    editTrip(tripId){
 
       this.$http.post('/trip/queryTripById/'+tripId).then(res=>{
         if(res.data.code==200){
@@ -264,14 +264,8 @@ export default {
         }
       })
     },
-    // isShoucang(houseId){
-    //    for(let i in this.shoucangList){
-    //       if(houseId==i){
-    //         return true;
-    //       }
-    //    }
-    // },
-        updateHouse(formName){
+
+        updateTrip(formName){
           console.log(this.editTripForm)
           this.$refs[formName].validate((valid) => {
           if (valid) {
@@ -279,7 +273,7 @@ export default {
             if(res.data.code == 200){
               this.$message.success("修改成功")
               this.editTripFormVisible=false,
-              this.queryHouse()
+              this.queryTrip()
             }else{
               this.$message.error("修改失败")
             }
@@ -290,17 +284,17 @@ export default {
           }
         });
     },
-    deleteHouse(houseId){
+    deleteTrip(id){
 
  this.$confirm('是否确认删除该景点?', '提示', {
           confirmButtonText: '确定',
           cancelButtonText: '取消',
           type: 'warning'
         }).then(()=>{
-      this.$http.post('/trip/deleteTripById/'+houseId).then(res=>{
+      this.$http.post('/trip/deleteTripById/'+id).then(res=>{
         if(res.data.code==200){
           this.$message.success("删除成功!")
-             this.queryHouse()
+             this.queryTrip()
         }else{
           this.$message.error("删除失败!")
         }
@@ -312,32 +306,7 @@ export default {
           });
         });
     },
-    addLove(id,index){
-      let userId=JSON.parse(window.sessionStorage.getItem("user")).id;
-      this.$http.get('/trip/addLoveTrip/',{params:{
-        houseId:id,
-        userId:userId
-      }}).then(res =>{
-        if(res.data.code==200){
-          this.flag=index
-            this.$message.success("收藏成功!")
-            this.queryHouse()
-        }
-      })
-    },
-    // queryShoucang(){
-    //    let userId=JSON.parse(window.sessionStorage.getItem("user")).id;
-    //     this.$http.get('/house/queryShouCang/',{params:{
-    //     userId:userId
-    //   }}).then(res =>{
-    //     if(res.data.code==200){
-    //         this.shoucangList=res.data.data
 
-    //         console.log(this.shoucangList)
-    //         console.log("查询成功")
-    //     }
-    //   })
-    // },
     editClose(){
       this.fileList=[]
       this.editTripFormVisible=false
@@ -349,13 +318,13 @@ export default {
      exceed(){
       const _this=this
       // this.$message.error("只能上传一张图片")
-      _this.notify("只能上传一张房源图片,需删除重新上传","error")
+      _this.notify("只能上传一张景区图片,需删除重新上传","error")
     },
      handleupdate(id) {//修改租赁状态
          this.$http.post('/trip/updateStatus/'+id+'/'+0).then(res=>{
             if(res.data.code==200){
                 this.$message.success("修改成功")
-                this.queryHouse()
+                this.queryTrip()
             }
             else{
               this.$message.error("修改失败!")
@@ -371,7 +340,7 @@ export default {
    }
      this.cities = cities
      this.tripLevel = tripLevel
-     this.queryHouse()
+     this.queryTrip()
   }
 }
 

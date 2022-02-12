@@ -78,7 +78,7 @@
 <el-upload
 class="avatar-uploader"
   name="file"
-  :action="path+'/user/upload'"
+  :action="path+'/admin/upload'"
   :show-file-list="false"
   :file-list="fileList"
   :on-success="success"
@@ -113,7 +113,6 @@ export default {
        userName:'',
        password:'',
        pic:'',
-       role:''
      },
 
      isCollapse:false,
@@ -170,7 +169,7 @@ export default {
      let param=new URLSearchParams();
      param.append("pic",this.img)
      param.append("userId",this.user.id)
-     this.$http.post('/user/updatePic',param).then(res=>{
+     this.$http.post('/admin/updatePic',param).then(res=>{
         if(res.data.code==200){
           let user=JSON.parse(window.sessionStorage.getItem("user"))
           // user.pic= res.data.data
@@ -188,9 +187,9 @@ export default {
           if (valid) {
             let params = new URLSearchParams();
             params.append("newPassword",this.passwordForm.newpassword);
-            params.append("userName",this.user.userName);
+            params.append("userId",this.user.id);
             if(this.user.password == this.passwordForm.oldpassword){
-              this.$http.post('/user/updatePassword',params).then(res=>{
+              this.$http.post('/admin/updatePassword',params).then(res=>{
                if(res.data.code==200) {
 
                   let  user = JSON.parse(window.sessionStorage.getItem("user"))

@@ -297,8 +297,8 @@ export default {
 		return result
 	},
       deleteriji(row){
-        console.log(row.id)
-        console.log(this.userId)
+        // console.log(row.id)
+        // console.log(this.userId)
          this.$http.get('/RiJi/deleterijiById',{params:{
               id: row.id,
               userId:this.userId

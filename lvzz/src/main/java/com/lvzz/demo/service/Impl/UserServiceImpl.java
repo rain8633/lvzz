@@ -6,6 +6,8 @@ import com.lvzz.demo.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -46,5 +48,15 @@ public class UserServiceImpl implements UserService {
     @Override
     public String queryPasswordById(Integer id) {
         return userMapper.queryPasswordById(id);
+    }
+
+    @Override
+    public List<User> queryAllUser() {
+        return userMapper.queryAllUser();
+    }
+
+    @Override
+    public int deleteUserById(Integer id) {
+        return userMapper.deleteUserById(id);
     }
 }

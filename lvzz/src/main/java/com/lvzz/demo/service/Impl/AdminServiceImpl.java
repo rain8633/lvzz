@@ -34,6 +34,6 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public int updatePic(String pic, Integer userId) {
-        return adminMapper.updatePassword(pic, userId);
+        return adminMapper.updatePic(pic, userId);
     }
 }

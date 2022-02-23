@@ -1,0 +1,25 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lvzz.demo.mapper.OrderMapper">
+
+    <insert id="addOrder">
+        insert into l_orders(oid,user_name,phone,trip_name,address,total_price,create_time) values (#{oid},#{userName},#{phone},#{tripName},#{address},#{totalPrice},#{createTime})
+    </insert>
+
+    <update id="updateOrdersStateById">
+        update  l_orders set status=#{status} where oid=#{oid}
+    </update>
+
+    <select id="findUserOrders" resultType="Orders" parameterType="Integer">
+        select oid,trip_name,address,lo.user_name,lo.phone,create_time,status,total_price from l_orders lo
+        left join l_user lu on lu.user_name = lo.user_name and lu.id=#{userId}
+    </select>
+
+    <select id="queryAllUserOrders" resultType="Orders">
+        select oid,trip_name,address,lo.user_name,lo.phone,create_time,status,total_price from l_orders lo
+        left join l_user lu on lu.user_name = lo.user_name
+    </select>
+
+    <delete id="deleteorderById" parameterType="String">
+        delete from l_orders where oid=#{oid}
+    </delete>
+</mapper>

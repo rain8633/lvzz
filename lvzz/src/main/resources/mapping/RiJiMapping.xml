@@ -19,7 +19,7 @@
     </select>
 
     <select id="queryRiJiDetail" resultType="com.lvzz.demo.pojo.RiJiPoJo" parameterType="Integer">
-        select lr.id as id,title,lu.user_name as userName,feel_score,content,lr.pic as pic,create_time,url
+        select lr.id as id,lr.user_id as userId,title,lu.user_name as userName,feel_score,content,lr.pic as pic,create_time,url
          from l_riji lr,l_user lu where lr.id=#{id} and lr.user_id = lu.id
     </select>
 

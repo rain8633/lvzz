@@ -11,6 +11,10 @@ import AllRiJi from '../views/shouye/AllRiJi.vue'
 import AddRiJi from '../views/shouye/AddRiJi.vue'
 import RiJiDetail from '../views/shouye/RiJiDetail.vue'
 import ShouCang from '../views/shouye/ShouCang.vue'
+import SearchTrips from '../views/shouye/SearchTrips.vue'
+import Buy from '../views/shouye/Buy.vue'
+import MyOrder from '../views/shouye/MyOrder.vue'
+import Orders from '../components/Orders.vue'
 
 Vue.use(VueRouter)
 
@@ -76,6 +80,28 @@ const routes = [
       path:'/shoucang',
       name:'Shoucang',
       component: ShouCang
+    },
+    {
+      path:"/search",
+      name:'Search',
+    component: SearchTrips
+    },
+    {
+      path:"/buy",
+      name:'Buy',
+      component: Buy
+    },
+    {
+      path:'/myorder',
+      name:'MyOrder',
+      component:MyOrder,
+      redirect:'/order',
+       children:[
+        {path:'/order',
+        name:'Order',
+       component:Orders,
+       }
+      ]
     }
 ]
 

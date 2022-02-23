@@ -59,7 +59,23 @@ public class TripController {
         return Result.success(list);
     }
 
+    @GetMapping("/queryUserTripsByKeyword")
+    public Result queryUserTripsByKeyword(@RequestParam Integer userId,@RequestParam String keywords,@RequestParam(required = false,defaultValue = "4") Integer pageSize, @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        Page<TripPoJo> tripPoJoList = tripService.queryUserTripsByKeyword(userId,keywords,pageNum,pageSize);
+        if(tripPoJoList == null){
+            return Result.error();
+        }
+        return Result.success(tripPoJoList);
+    }
 
+    @GetMapping("/queryTripsByKeyword")
+    public Result queryTripsByKeyword(@RequestParam String keywords,@RequestParam(required = false,defaultValue = "4") Integer pageSize, @RequestParam(required = false,defaultValue = "1") Integer pageNum){
+        Page<TripPoJo> tripPoJoList = tripService.queryTripsByKeyword(keywords,pageNum,pageSize);
+        if(tripPoJoList == null){
+            return Result.error();
+        }
+        return Result.success(tripPoJoList);
+    }
 
     @GetMapping("/queryTripListByLevel")
     public Result queryTripListByLevel(@RequestParam(required = false,defaultValue = "4") Integer pageSize, @RequestParam(required = false,defaultValue = "1") Integer pageNum,TripPoJo tripPoJo){

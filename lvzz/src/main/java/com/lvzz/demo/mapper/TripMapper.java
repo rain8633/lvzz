@@ -21,4 +21,6 @@ public interface TripMapper {
     int addTrip(Trip trip);
 
     int deleteTripById(Integer id);
+
+    List<TripPoJo> queryTripsByKeyword(String keywords);
 }

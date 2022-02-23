@@ -107,5 +107,34 @@ public class TripServiceImpl implements TripService {
         return tripMapper.deleteTripById(id);
     }
 
+    @Override
+    public Page<TripPoJo> queryUserTripsByKeyword(Integer userId,String keywords,Integer pageNum,Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<TripPoJo> TripList=tripMapper.queryTripsByKeyword(keywords);
+        List<Integer> list = shouCangMapper.isShoucang(userId);
+            for (Integer s : list) {
+                for (TripPoJo tripPoJo1 : TripList) {
+                    if (tripPoJo1.getId() == s) {
+                        tripPoJo1.setShoucang(true);
+                    }
+                }
+            }
+        PageInfo<TripPoJo> pageInfo=new PageInfo<>(TripList);
+
+        return new Page<>(pageInfo.getPageNum(),pageInfo.getPageSize(),
+                pageInfo.getList(),pageInfo.getPages(),pageInfo.getTotal());
+
+    }
+
+    @Override
+    public Page<TripPoJo> queryTripsByKeyword(String keywords, Integer pageNum, Integer pageSize) {
+        PageHelper.startPage(pageNum, pageSize);
+        List<TripPoJo> TripList=tripMapper.queryTripsByKeyword(keywords);
+        PageInfo<TripPoJo> pageInfo=new PageInfo<>(TripList);
+
+        return new Page<>(pageInfo.getPageNum(),pageInfo.getPageSize(),
+                pageInfo.getList(),pageInfo.getPages(),pageInfo.getTotal());
+    }
+
 
 }

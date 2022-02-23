@@ -259,6 +259,7 @@ export default {
          if(res.data.code==200){
              this.$message.success("修改成功!")
             this.table = false;
+            this.queryAllRiJi();
 
          }else{
            this.$message.error("修改失败!请稍后重试")

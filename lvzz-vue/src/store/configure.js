@@ -7,7 +7,8 @@ const configure = {
     activeName: '', // 类型名
     tempList: {}, // 单个景点信息
     index: 0, // 列表中的序号
-    isActive: false
+    isActive: false,
+    listOfSongs: [], // 当前景点列表
   },
   getters: {
     isActive: state => {

@@ -9,7 +9,7 @@
         {{item.name}}
       </li>
     </ul>
-    <div class="song-content">
+    <div>
       <content-list :contentList="tripList"></content-list>
       <div class="pagination">
         <el-pagination

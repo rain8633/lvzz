@@ -20,6 +20,8 @@
       <div class="album-address">
         <p>地址:&nbsp;&nbsp;{{trip.address}}</p>
         <p>景区价格:&nbsp;&nbsp;{{trip.price}}元/人 &nbsp;&nbsp;&nbsp;&nbsp;景区级别:&nbsp;&nbsp;{{trip.levelName}}</p>
+        <p>联系电话:&nbsp;&nbsp;{{trip.phone}}</p>
+        <!-- <el-input-number v-model="num" @change="handleChange" :min="1" :max="10" label="票数"></el-input-number> -->
       </div>
       <!--评分-->
       <div class="album-score">
@@ -80,7 +82,8 @@ export default {
       count: 0, // 点赞数
       tripListId: '', // 景点ID
       value3: 0,
-      value5:0
+      value5:0,
+       num: 1
     }
   },
   computed: {
@@ -143,6 +146,12 @@ export default {
     }else{
       this.notify("请先登录",'warning');
     }
+  },
+   handleChange(value) {
+        console.log(value);
+    },
+  buy(){
+    this.$router.push({path: '/buy', query: {trip: this.trip}})
   }
   }
 }

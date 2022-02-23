@@ -26,7 +26,12 @@ const loginMsg = [{
 const menuList = [{
   name: '设置',
   path: '/setting'
-}, {
+},
+{
+  name:'我的订单',
+  path: '/myorder'
+},
+{
   name: '退出',
   path: 0
 }]

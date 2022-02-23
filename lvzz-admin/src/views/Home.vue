@@ -39,7 +39,10 @@
     <i style="font-size:20px" class="el-icon-s-custom"></i>
     <span class="spanclass" slot="title">用户管理</span>
   </el-menu-item>
-
+ <el-menu-item  index="/orders">
+    <i style="font-size:20px" class="el-icon-s-ticket"></i>
+    <span class="spanclass" slot="title">购票信息</span>
+  </el-menu-item>
 
   <el-menu-item  index="/addTrip">
     <i style="font-size:20px" class="el-icon-house"></i>

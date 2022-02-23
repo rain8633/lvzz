@@ -28,4 +28,8 @@ public interface TripService {
     int addTrip(Trip trip);
 
     int deleteTripById(Integer id);
+
+    Page<TripPoJo> queryUserTripsByKeyword(Integer userId,String keywords,Integer pageNum,Integer pageSize);
+
+    Page<TripPoJo> queryTripsByKeyword(String keywords, Integer pageNum, Integer pageSize);
 }

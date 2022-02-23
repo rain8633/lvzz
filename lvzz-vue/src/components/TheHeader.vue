@@ -113,7 +113,10 @@ export default {
       }
       document.querySelector('.menu').classList.remove('show')
       if (path) {
-        this.$router.push({path: path})
+         if (!this.loginIn && path === '/myorder') {
+        this.notify('请先登录', 'warning')
+      }
+       else this.$router.push({path: path})
       } else {
         this.$store.commit('setLoginIn', false)
         //  window.sessionStorage.clear()

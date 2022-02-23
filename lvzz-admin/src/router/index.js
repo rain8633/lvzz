@@ -8,6 +8,7 @@ import TripList from '../views/Trip/TripList.vue'
 import AllRiJi from '../views/Trip/AllRiJi.vue'
 import Statistics from '../views/Trip/Statistics.vue'
 import userInfo from '../views/Trip/UserInfo.vue'
+import Orders from '../views/Trip/Orders.vue'
 
 Vue.use(VueRouter)
 
@@ -44,6 +45,10 @@ const routes = [
         path:"/userInfo",
         name:"UserInfo",
         component:userInfo
+      },{
+        path:'/orders',
+        name: 'Orders',
+        component:Orders
       }
     ]
   },

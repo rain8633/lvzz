@@ -47,6 +47,17 @@
         where lt.id=#{tripId}
     </select>
 
+    <select id="queryTripsByKeyword" parameterType="String" resultType="com.lvzz.demo.pojo.TripPoJo">
+         select lt.id as id,trip_name as tripName,address,level_name as levelName,phone,price,picImg,info
+        from l_trip lt
+        left join l_level le on le.id=lt.level_id
+        <where>
+            <if test="keywords!=null || keywords !=''">
+                and trip_name like concat('%',#{keywords},'%')
+            </if>
+        </where>
+    </select>
+
     <update id="updateTripById" parameterType="com.lvzz.demo.pojo.TripPoJo">
         update l_trip set trip_name=#{tripName},address=#{address},level_id=#{levelId},phone=#{phone},
         price=#{price},picImg=#{picImg},info=#{info} where id=#{id}

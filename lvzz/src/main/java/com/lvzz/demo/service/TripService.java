@@ -32,4 +32,8 @@ public interface TripService {
     Page<TripPoJo> queryUserTripsByKeyword(Integer userId,String keywords,Integer pageNum,Integer pageSize);
 
     Page<TripPoJo> queryTripsByKeyword(String keywords, Integer pageNum, Integer pageSize);
+
+    List<TripPoJo> queryAllTripNoPage(TripPoJo tripPoJo);
+
+    List<TripPoJo> queryTripListByLevelNoPage(TripPoJo tripPoJo);
 }

@@ -59,6 +59,24 @@ public class TripController {
         return Result.success(list);
     }
 
+    @GetMapping("/queryAllTripNoPage")
+    public Result queryAllTripNoPage(TripPoJo tripPoJo){
+        List<TripPoJo> list = tripService.queryAllTripNoPage(tripPoJo);
+        if(list == null){
+            return Result.error();
+        }
+        return Result.success(list);
+    }
+
+    @GetMapping("/queryTripListByLevelNoPage")
+    public Result queryTripListByLevelNoPage(TripPoJo tripPoJo){
+        List<TripPoJo> list = tripService.queryTripListByLevelNoPage(tripPoJo);
+        if(list == null){
+            return Result.error();
+        }
+        return Result.success(list);
+    }
+
     @GetMapping("/queryUserTripsByKeyword")
     public Result queryUserTripsByKeyword(@RequestParam Integer userId,@RequestParam String keywords,@RequestParam(required = false,defaultValue = "4") Integer pageSize, @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         Page<TripPoJo> tripPoJoList = tripService.queryUserTripsByKeyword(userId,keywords,pageNum,pageSize);

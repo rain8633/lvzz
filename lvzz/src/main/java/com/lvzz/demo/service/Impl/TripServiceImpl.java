@@ -136,5 +136,15 @@ public class TripServiceImpl implements TripService {
                 pageInfo.getList(),pageInfo.getPages(),pageInfo.getTotal());
     }
 
+    @Override
+    public List<TripPoJo> queryAllTripNoPage(TripPoJo tripPoJo) {
+        return tripMapper.queryAllTrip(tripPoJo);
+    }
+
+    @Override
+    public List<TripPoJo> queryTripListByLevelNoPage(TripPoJo tripPoJo) {
+        return tripMapper.queryTripListByLevel(tripPoJo);
+    }
+
 
 }

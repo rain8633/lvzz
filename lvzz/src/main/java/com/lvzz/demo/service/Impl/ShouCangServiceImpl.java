@@ -45,4 +45,13 @@ public class ShouCangServiceImpl implements ShouCangService {
     public List<TongJi> queryScInfo() {
         return shouCangMapper.queryScInfo();
     }
+
+    @Override
+    public List<TripPoJo> queryMyShouCangNoPage(Integer userId) {
+        List<TripPoJo> shouCangList=shouCangMapper.queryMyShouCang(userId);
+        for(TripPoJo tripPoJo:shouCangList){
+            tripPoJo.setShoucang(true);
+        }
+        return shouCangList;
+    }
 }

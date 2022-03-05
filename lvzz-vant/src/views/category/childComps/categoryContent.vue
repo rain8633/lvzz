@@ -4,7 +4,7 @@
             <div :class="{active: countIndex==index}" v-for="(item,index) in categoryList" :key="index" @click="indexChange(index,item)">{{ item.name }}</div>
         </div>
         <div class="content">
-            <div  style="margin-bottom: 50px;" @click="itemDetail(item)" v-for="(item,index) in cateContentList" :key="index">
+            <div @click="itemDetail(item)" v-for="(item,index) in cateContentList" :key="index">
                 <!-- <a :href="item.link"> -->
                 <img :src="'http://localhost:9001/boot'+item.picImg">
                 <p>{{ item.tripName }}</p>
@@ -14,7 +14,8 @@
     </div>
 </template>
 <script>
-import {getSubCategory,getAllCategory} from '../../../network/category.js'
+import {getSubCategory,getAllCategory,getUserAllCategory,getUserSubCategory} from '../../../network/category.js'
+import { mapGetters } from 'vuex'
 export default {
     props: {
         categoryList: {
@@ -28,9 +29,15 @@ export default {
         return {
             countIndex:0,
             name:'',
-            cateContentList:[]
+            cateContentList:[],
+            userId:''
         };
     },
+    computed: {
+    ...mapGetters([
+      'loginIn', // 登录标识
+    ])
+  },
     created() {
        this.getAllCategory()
     },
@@ -40,11 +47,17 @@ export default {
             this.$router.push(`/detail/${item.id}`)
         },
         getAllCategory(){
-           getAllCategory().then((res)=>{
-            console.log(res)
-             this.cateContentList = res.data;
-             console.log(this.cateContentList)
-        });
+            if(!this.loginIn){
+               getAllCategory().then((res)=>{
+               this.cateContentList = res.data;
+               console.log(this.cateContentList)
+               })
+             }else{
+              this.userId = JSON.parse(window.sessionStorage.getItem("user")).id
+              getUserAllCategory(this.userId).then(res=>{
+               this.cateContentList = res.data;
+            })
+        }
         },
         indexChange(index,item){
            this.countIndex = index;
@@ -53,10 +66,18 @@ export default {
             }else{
             this.name = item.name
             console.log(this.name);
+            if(!this.loginIn){
             getSubCategory(this.name).then((res)=>{
                 console.log(res);
                 this.cateContentList = res.data;
-            });
+            })
+            }else{
+                this.userId = JSON.parse(window.sessionStorage.getItem("user")).id
+                  getUserSubCategory(this.name,this.userId).then((res)=>{
+                console.log(res);
+                this.cateContentList = res.data;
+            })
+            }
             }
         }
     }
@@ -91,11 +112,11 @@ export default {
         flex-wrap: wrap;
         justify-content: space-around;
         float:left;
-       
          overflow:auto; 
-         width:70%; 
+         width:70%;
          height: 100%;
          div{
+             height: 55px;
              img{
                  width: 2rem;
                  height: 2rem;

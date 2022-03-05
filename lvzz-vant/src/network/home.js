@@ -12,3 +12,12 @@ export function getHomeGoods(){
        
     });
 }
+
+export function getHomeGoodsByUserId(userId){
+    return request({
+        url:'/trip/queryUserHotTripList',
+       params:{
+           userId
+       }
+    });
+}

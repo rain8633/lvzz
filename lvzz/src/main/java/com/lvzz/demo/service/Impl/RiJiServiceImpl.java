@@ -58,4 +58,9 @@ public class RiJiServiceImpl implements RiJiService {
         return new Page<>(pageInfo.getPageNum(),pageInfo.getPageSize(),
                 pageInfo.getList(),pageInfo.getPages(),pageInfo.getTotal());
     }
+
+    @Override
+    public List<RiJi> queryUserRiJiNoPage(Integer userId) {
+        return  riJiMapper.queryRiJiList(userId,"","");
+    }
 }

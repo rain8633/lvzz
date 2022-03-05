@@ -6,6 +6,17 @@ export function getCategory(){
     });
 }
 
+
+export function getUserSubCategory(levelName,userId) {
+    return request({
+        url:'/trip/queryUserTripListByLevelNoPage',
+        params:{
+           levelName,
+           userId
+        }
+    });
+}
+
 export function getSubCategory(levelName) {
     return request({
         url:'/trip/queryTripListByLevelNoPage',
@@ -15,6 +26,14 @@ export function getSubCategory(levelName) {
     });
 }
 
+export function getUserAllCategory(userId) {
+    return request({
+        url:'/trip/queryUserAllTripNoPage',
+        params:{
+            userId
+        }
+    });
+}
 
 export function getAllCategory() {
     return request({

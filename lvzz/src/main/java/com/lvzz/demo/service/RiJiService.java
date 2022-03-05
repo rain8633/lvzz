@@ -19,4 +19,6 @@ public interface RiJiService {
     int deleterijiById(Integer id, Integer userId);
 
     Page<RiJiPoJo> queryAllUserRiJi(Integer pageSize,Integer pageNum);
+
+    List<RiJi> queryUserRiJiNoPage(Integer userId);
 }

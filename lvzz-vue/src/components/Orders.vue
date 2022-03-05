@@ -32,13 +32,16 @@
       prop="status"
       label="订单状态"
       width="200"
-      :filters="[{ text: '已支付', value: 1 }, { text: '未支付', value: 0 }]"
+      :filters="[{ text: '已支付', value: 1 }, { text: '未支付', value: 0 },{text: '手机支付', value: 2}]"
       :filter-method="filterTag"
       filter-placement="bottom-end">
       <template slot-scope="scope">
         <el-tag v-if="scope.row.status==1"
           :type="'success'"
           disable-transitions>已支付</el-tag>
+          <el-tag v-if="scope.row.status==2"
+          :type="'success'"
+          disable-transitions>手机支付</el-tag>
           <el-tag v-if="scope.row.status==0"
           :type="'primary'"
           disable-transitions>未支付</el-tag>

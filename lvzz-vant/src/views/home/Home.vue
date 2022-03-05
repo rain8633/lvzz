@@ -33,7 +33,8 @@
 </template>
 <script>
 //网络请求 js 模块
-import { getHomeMultidata, getHomeGoods } from "@/network/home.js";
+import {getHomeGoods,getHomeGoodsByUserId} from "@/network/home.js";
+import { mapGetters } from 'vuex'
 
 //home子组件
 import HomeSwiper from "./childComps/HomeSwiper.vue"; //轮播图
@@ -54,16 +55,21 @@ export default {
             recommend: [],
             goods: [],
             currentType: "pop", //页面默认渲染当前类型
-            serach:''
+            serach:'',
+            userId:''
         };
     },
+    computed: {
+    ...mapGetters([
+      'loginIn', // 登录标识
+    ])
+  },
     mounted() {
      
             //获取轮播图数据
             this.banner = swiperList;
             
-           
-        this.getHomeGoods();
+            this.getHomeGoods();
       
 
         //图片自定义事件 当图片加载后就会触发这个自定义事件
@@ -79,14 +85,20 @@ export default {
     methods: {
         // 请求函数
         getHomeGoods() {
-            getHomeGoods().then(res => {
+            if(!this.loginIn){
+               getHomeGoods().then(res => {
                 // console.log(res.data)
                   this.goods = res.data.slice(0, 10)//slice使用于数组
                 // this.goods[type].list = res.data.list 不能这样写，不然永远只有三十条数据
                 // this.goods[currentType].page++;
                 // console.log(this.goods[currentType].list);
-            });
-          
+            })
+            }else{
+                this.userId = JSON.parse(window.sessionStorage.getItem("user")).id
+                   getHomeGoodsByUserId(this.userId).then(res=>{
+                   this.goods = res.data.slice(0, 10)//slice使用于数组
+               })
+            }
         },
         //点击tabControll切换
         titleChange(index){

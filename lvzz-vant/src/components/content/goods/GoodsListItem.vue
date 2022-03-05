@@ -43,7 +43,8 @@ export default {
         height:40vw;
         flex-direction: column;
         padding: 0 2vw;
-        margin-bottom: 50px;
+        margin-bottom: 30px;
+        margin-left: 10px;
         img{
             width: 100%;
             height:85%;
@@ -51,17 +52,17 @@ export default {
         }
         p{
             display: -webkit-box;  //超出文字部分用... 表示
-            overflow: hidden;
+            // overflow: hidden;
             -webkit-box-orient: vertical;
             -webkit-line-clamp: 1;
             font-size: 0.24rem;
             padding:0 0.08rem;
-            margin-top: 0.1rem;
+            margin-top: 0.2rem;
         }
         .price{
             display: flex;
             justify-content: center;
-            margin:-0.41rem 0rem 0rem 2rem;
+            margin:-1.53rem 0rem 0rem 2rem;
             .price_goods{
                 color: #EF232F;
             }

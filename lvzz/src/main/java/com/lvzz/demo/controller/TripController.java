@@ -40,6 +40,15 @@ public class TripController {
         return Result.success(list);
     }
 
+    @GetMapping("/queryUserHotTripList")
+    public Result queryUserHotTripList(@RequestParam Integer userId){
+        List<TripPoJo> list = tripService.queryUserHotTripList(userId);
+        if(list == null){
+            return Result.error();
+        }
+        return Result.success(list);
+    }
+
     @GetMapping("/queryTripList")
     public Result queryTripList(@RequestParam Integer userId,@RequestParam(required = false,defaultValue = "4") Integer pageSize, @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         Page<TripPoJo> list = tripService.querytripList(userId,pageNum,pageSize);
@@ -71,6 +80,36 @@ public class TripController {
     @GetMapping("/queryTripListByLevelNoPage")
     public Result queryTripListByLevelNoPage(TripPoJo tripPoJo){
         List<TripPoJo> list = tripService.queryTripListByLevelNoPage(tripPoJo);
+        if(list == null){
+            return Result.error();
+        }
+        return Result.success(list);
+    }
+
+
+    /**
+     * 通过类别查看景点是否被用户收藏
+     * @param tripPoJo
+     * @param userId
+     * @return
+     */
+    @GetMapping("/queryUserTripListByLevelNoPage")
+    public Result queryUserTripListByLevelNoPage(TripPoJo tripPoJo,@RequestParam Integer userId){
+        List<TripPoJo> list = tripService.queryUserTripListByLevelNoPage(tripPoJo,userId);
+        if(list == null){
+            return Result.error();
+        }
+        return Result.success(list);
+    }
+
+    /**
+     * 浏览器端查询所有旅游景点同时判断是否收藏
+     * @param userId
+     * @return
+     */
+    @GetMapping("/queryUserAllTripNoPage")
+    public Result queryUserAllTripNoPage(@RequestParam Integer userId){
+        List<TripPoJo> list = tripService.queryUserAllTripNoPage(userId);
         if(list == null){
             return Result.error();
         }

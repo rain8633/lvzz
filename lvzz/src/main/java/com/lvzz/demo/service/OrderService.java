@@ -16,4 +16,6 @@ public interface OrderService {
     Page<Orders> queryAllUserOrders(Integer pageSize, Integer pageNum);
 
     int deleteorderById(String oid);
+
+    List<Orders> findUserOrdersNoPage(Integer userId);
 }

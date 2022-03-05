@@ -30,6 +30,16 @@ const routes = [
         component: ()=>import('@/views/profile/Profile.vue')
     },
     {
+        name:'MyShouCang',
+        path:'/myshoucang',
+        component: ()=>import('@/views/profile/MyShouCang.vue')
+    },
+     {
+        name:'MyOrders',
+        path:'/myorders',
+        component: ()=>import('@/views/profile/MyOrders.vue')
+    },
+    {
         name:'Login',
         path:'/login',
         component: ()=>import('@/views/Login/login.vue')
@@ -39,6 +49,16 @@ const routes = [
         path:'/riji',
         component: ()=>import('@/views/riji/riji.vue')
     },
+     {
+        name:'buy',
+        path:'/buy',
+        component: ()=>import('@/views/buy/buy.vue')
+    },
+    {
+        name:'MyRiJi',
+        path:'/myriji',
+        component: ()=>import('@/views/riji/childComps/MyRiJi.vue')
+    },
     {
         name:'Detail',
         path:'/Detail/:id',
@@ -47,7 +67,7 @@ const routes = [
 ]
 
 const router = new VueRouter({
- /* mode: 'history',  // 路由模式*/
+//   mode: 'history',  // 路由模式*/
    mode: 'hash',
   base: process.env.BASE_URL,
   routes

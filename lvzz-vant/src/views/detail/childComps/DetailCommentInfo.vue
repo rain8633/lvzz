@@ -13,7 +13,6 @@
             <div class="center">
                 <span class="data">{{item.createTime }}</span>
             </div>
-            
         </div>
           </li>
          </ul>
@@ -84,6 +83,9 @@ export default {
 };
 </script>
 <style lang="less" scoped>
+.popular{
+    margin-bottom: 10px;
+}
 .comment_info {
     margin-top: 0.4rem;
     border-top: 0.06rem solid #ececec;
@@ -104,15 +106,17 @@ export default {
         }
     }
     .comment {
+        margin: 0.2rem;;
         p {
             margin-top: 0.3rem;
             font-size: 0.3rem;
-            line-height: 0.4rem;
+            line-height: 0.2rem;
+            margin-bottom: 0.3rem;
         }
         .center {
             font-size: 0.28rem;
             color: gray;
-            line-height: 0.64rem;
+            line-height: 0.6rem;
             .data {
                 margin-right: 0.3rem;
             }

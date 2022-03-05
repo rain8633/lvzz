@@ -41,6 +41,15 @@ public class RiJiController {
         return Result.success("/pics/"+newName);
     }
 
+    @PostMapping("/queryUserRiJiNoPage")
+    public Result queryUserRiJiNoPage(@RequestParam Integer userId){
+        List<RiJi> riJiList = riJiService.queryUserRiJiNoPage(userId);
+        if(riJiList!=null){
+            return Result.success(riJiList);
+        }
+        else return Result.error();
+    }
+
     @PostMapping("/AddRiJi")
     public Result AddRiJi(RiJi riJi){
         String date= DateFormatUtils.format(new Date(),"yyyy-MM-dd");

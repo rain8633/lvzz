@@ -16,4 +16,6 @@ public interface ShouCangService {
     int deleteShouCang(Integer userId,Integer tripId);
 
     List<TongJi> queryScInfo();
+
+    List<TripPoJo> queryMyShouCangNoPage(Integer userId);
 }

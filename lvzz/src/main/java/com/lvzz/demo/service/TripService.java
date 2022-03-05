@@ -36,4 +36,10 @@ public interface TripService {
     List<TripPoJo> queryAllTripNoPage(TripPoJo tripPoJo);
 
     List<TripPoJo> queryTripListByLevelNoPage(TripPoJo tripPoJo);
+
+    List<TripPoJo> queryUserAllTripNoPage(Integer userId);
+
+    List<TripPoJo> queryUserTripListByLevelNoPage(TripPoJo tripPoJo, Integer userId);
+
+    List<TripPoJo> queryUserHotTripList(Integer userId);
 }

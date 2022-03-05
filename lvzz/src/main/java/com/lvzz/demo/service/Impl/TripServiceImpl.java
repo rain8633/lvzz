@@ -146,5 +146,58 @@ public class TripServiceImpl implements TripService {
         return tripMapper.queryTripListByLevel(tripPoJo);
     }
 
+    /**
+     * 移动端查询旅游景点同时判断是否收藏
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<TripPoJo> queryUserAllTripNoPage(Integer userId) {
+        List<TripPoJo> TripList=tripMapper.querytripList();
+        List<Integer> list = shouCangMapper.isShoucang(userId);
+        for (Integer s : list) {
+            for (TripPoJo tripPoJo1 : TripList) {
+                if (tripPoJo1.getId() == s) {
+                    tripPoJo1.setShoucang(true);
+                }
+            }
+        }
+        return TripList;
+    }
+
+    /**
+     * 通过类别查看景点是否被用户收藏
+     * @param tripPoJo
+     * @param userId
+     * @return
+     */
+    @Override
+    public List<TripPoJo> queryUserTripListByLevelNoPage(TripPoJo tripPoJo, Integer userId) {
+        List<TripPoJo> TripList=tripMapper.queryTripListByLevel(tripPoJo);
+        List<Integer> list = shouCangMapper.isShoucang(userId);
+        for (Integer s : list) {
+            for (TripPoJo tripPoJo1 : TripList) {
+                if (tripPoJo1.getId() == s) {
+                    tripPoJo1.setShoucang(true);
+                }
+            }
+        }
+       return TripList;
+    }
+
+    @Override
+    public List<TripPoJo> queryUserHotTripList(Integer userId) {
+        List<TripPoJo> TripList=tripMapper.querytripList();
+        List<Integer> list = shouCangMapper.isShoucang(userId);
+        for (Integer s : list) {
+            for (TripPoJo tripPoJo1 : TripList) {
+                if (tripPoJo1.getId() == s) {
+                    tripPoJo1.setShoucang(true);
+                }
+            }
+        }
+        return TripList;
+    }
+
 
 }

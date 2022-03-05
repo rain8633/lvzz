@@ -21,20 +21,20 @@
             </div>
         </div>
         <div class="news">
-            <div>
-                <img src="@/assets/img/profile/message.svg">
-                <span>我的订单</span>
+            <div class="myorder">
+                <img src="@/assets/img/profile/myorder.svg">
+                <span @click="orders()">我的订单</span>
             </div>
-            <div class="shop">
-                <img src="../../assets\/img/profile/pointer.svg">
-                <p>我的日记</p>
+            <div class="riji">
+                <img src="../../assets/img/profile/diary.svg">
+                <p @click="myriji()">我的日记</p>
             </div>
-            <div>
-                <img src="../../assets/img/profile/message.svg">
+            <div class="shoucang">
+                <img src="../../assets/img/profile/shoucang.svg">
                 <p @click="shoucang()">我的收藏</p>
             </div>
-            <div>
-                <img src="../../assets/img/profile/vip.svg">
+            <div class="tologin">
+                <img src="../../assets/img/profile/tologin.svg">
                 <p @click="loginout()">退出登录</p>
             </div>
         </div>
@@ -57,9 +57,18 @@ export default {
        this.user = JSON.parse(window.sessionStorage.getItem("user"))
     },
     methods:{
+        orders(){
+           this.$router.push('/myorders')
+        },
+        myriji(){
+             this.$router.push('/myriji')
+        },
         login(){
             this.$router.push('/login')
         }, 
+        shoucang(){
+            this.$router.push('/myshoucang')
+        },
         loginout(){
              this.$store.commit('setLoginIn', false)
         //  window.sessionStorage.clear()
@@ -73,7 +82,7 @@ export default {
     .my{
         .header{
             padding: 0.2rem 0.2rem 0.4rem 0.2rem;
-            height: 2rem;
+            height: 3rem;
             background-color: #FF8E96;
             .title{
                 color: white;
@@ -95,7 +104,9 @@ export default {
                 }
                 .center{
                     margin-left: -1.5rem;
+                   
                     .login{
+                         margin-top:0.7rem;
                         font-size: 0.4rem;
                     }
                     .iphone{
@@ -133,13 +144,24 @@ export default {
             }
         }
         .news{
+            
             display: flex;
             flex-direction: column;
-            height: 3.2rem;
+            height: 4.5rem;
             padding: 0 0.3rem;
             border-bottom: 0.12rem solid #F2F2F2;
-            .shop{
+            .myorder{
+                margin-top:20px;
+                 img{
+                    margin-left: -0.15rem;
+                    margin-bottom: 0rem;
+                    width: 0.85rem;
+                    height: 0.85rem;
+                }
+            }
+            .riji{
                 p{  
+                    margin-top:40px;
                     display: flex;
                     align-items: center;
                     width: calc(100% - 0.6rem);
@@ -147,14 +169,31 @@ export default {
                     border-top: 1px solid #f2f2f2;
                     border-bottom: 1px solid #f2f2f2;
                 }
+                img{
+                    margin-right: 0.2rem;
+                    margin-bottom: 0.2rem;
+                    width: 0.6rem;
+                    height: 0.6rem;
+                }
+            }
+            .shoucang {
+                img{
+                    width: 0.6rem;
+                    height: 0.56rem;
+            }
+            }
+            .tologin{
+                margin-top: -20px;
             }
             div{
                 flex: 1;
                 display: flex;
+                height:70px;
                 align-items: center;
                 font-size: 0.32rem;
                 img{
                     margin-right: 0.2rem;
+                    margin-bottom: 1rem;
                     width: 0.6rem;
                     height: 0.6rem;
                 }

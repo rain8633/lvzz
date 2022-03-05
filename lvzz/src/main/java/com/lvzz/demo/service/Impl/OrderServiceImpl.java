@@ -57,4 +57,13 @@ public class OrderServiceImpl implements OrderService {
     public int deleteorderById(String oid) {
         return orderMapper.deleteorderById(oid);
     }
+
+    @Override
+    public List<Orders> findUserOrdersNoPage(Integer userId) {
+
+        List<Orders> rijiList=orderMapper.findUserOrders(userId);
+
+
+        return rijiList;
+    }
 }

@@ -45,11 +45,37 @@ public class OrderContoller {
          }else return Result.error();
     }
 
+    @PostMapping("/addOrder1")
+    public Result addOrder1(Orders orders) throws Exception {
+        orders.setOid(UUIDUtils.getUUID());
+        String date= DateFormatUtils.format(new Date(),"yyyy-MM-dd HH-mm-ss");
+        orders.setCreateTime(date);
+        orders.setStatus(2);
+        int i = orderService.addOrder(orders);
+        if(i>0){
+            return Result.success();
+        }else return Result.error();
+    }
+
     @RequestMapping("/findUserOrders")
     public Result findUserOrders(@RequestParam Integer userId,@RequestParam(required = false,defaultValue = "4") Integer pageSize, @RequestParam(required = false,defaultValue = "1") Integer pageNum){
         Page<Orders> ordersList = orderService.findUserOrders(userId,pageSize,pageNum);
         if(ordersList != null){
            return Result.success(ordersList);
+        }
+        else return Result.error();
+    }
+
+    /**
+     *移动端查询订单
+     * @param userId
+     * @return
+     */
+    @RequestMapping("/findUserOrdersNoPage")
+    public Result findUserOrdersNoPage(@RequestParam Integer userId){
+       List<Orders> ordersList = orderService.findUserOrdersNoPage(userId);
+        if(ordersList != null){
+            return Result.success(ordersList);
         }
         else return Result.error();
     }

@@ -27,6 +27,16 @@ public class ShouCangController {
         else return Result.error();
     }
 
+
+    @PostMapping("/queryMyShouCangNoPage")
+    public Result queryMyShouCangNoPage(@RequestParam Integer userId){
+        List<TripPoJo> list = shouCangService.queryMyShouCangNoPage(userId);
+        if(list!=null){
+            return Result.success(list);
+        }
+        else return Result.error();
+    }
+
     @PostMapping("/addShouCang/{userId}/{id}")
     public Result addShouCang(@PathVariable("userId") Integer userId,@PathVariable("id") Integer id){
         int i = shouCangService.addShouCang(userId,id);

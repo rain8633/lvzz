@@ -17,6 +17,13 @@ import FastClick from 'fastclick'
 //添加事件总线npm
 Vue.prototype.$bus = new Vue();
 
+import 'summernote'
+import 'summernote/dist/summernote.css'
+import 'summernote/lang/summernote-zh-CN.js'
+import 'bootstrap'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'popper.js'
+
 //解决移动端300毫秒延迟
 FastClick.attach(document.body);
 

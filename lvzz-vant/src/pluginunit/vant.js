@@ -2,9 +2,13 @@ import Vue from 'vue'
 import {
     Button,
     NavBar,
+    Dialog ,
     Tabbar,
+    Empty,
+    CellGroup ,
     TabbarItem,
     Swipe,
+    Tag ,
     SwipeItem,
     Sticky,
     GoodsAction,
@@ -12,18 +16,25 @@ import {
     GoodsActionButton,
     Toast,
     Card,
+    Cell,
     SubmitBar,
     Checkbox,
     Icon,
     Loading,
     NoticeBar,
+    SwipeCell,
     Search,
     Rate ,
     Notify ,
-    Field
+    Field,
+    Uploader ,
+    ContactEdit ,
+    Stepper 
 } from 'vant'
 
+Vue.use(ContactEdit)
 Vue.use(Button);
+Vue.use(Dialog)
 Vue.use(NavBar);
 Vue.use(Tabbar);
 Vue.use(TabbarItem);
@@ -44,3 +55,11 @@ Vue.use(Search)
 Vue.use(Rate)
 Vue.use(Notify)
 Vue.use(Field);
+Vue.use(Uploader);
+Vue.use(Empty);
+Vue.use(SwipeCell);
+Vue.use(Stepper);
+Vue.use(CellGroup);
+Vue.use(Cell);
+Vue.use(Tag)
+

@@ -1,5 +1,5 @@
 #### 在做毕设之前 打算写一个旅游自助管理系统练练手  前端页面以及布局使用的scss文件参考之前的音乐播放器页面，在此基础上修改了一些css属性
-#### 本网站分为用户端和管理员端，用户端完成注册登录，浏览景点信息，收藏，评分，发表评论，发表游记，查看旅游路线，购票；管理员端完成用户管理，游记管理，景点信息管理，购票管理以及收藏统计
+#### 本网站分为用户端分和管理员端，用户端分为Web端和移动端，用户端完成注册登录，浏览景点信息，收藏，评分，发表评论，发表游记，查看旅游路线，购票；管理员端完成用户管理，游记管理，景点信息管理，购票管理以及收藏统计;
 #### 基于springboot+vue的旅游自助管理平台
 ### 用户端
 #### 登录注册
@@ -28,7 +28,7 @@
 
 #### 景点详情页
 
-实现景点收藏 景区评分 景区评价 前往购票功能，其中评论功能简单实现Redis缓存（这块逻辑没有处理好  会把所有在缓存中的评论全部展示）
+实现景点收藏 景区评分 景区评价 前往购票功能，其中评论功能简单实现Redis缓存
 
 ![](https://pic.imgdb.cn/item/63e4acf44757feff332cba00.png)
 
@@ -81,6 +81,32 @@
 #### 查看订单列表
 
 ![](https://pic.imgdb.cn/item/63e4e6194757feff338f87c8.png)
+
+### 移动端
+
+移动端使用Vue+Vant框架开发
+
+![](https://pic.imgdb.cn/item/63e5c7244757feff33ab7b17.png)
+
+![](https://pic.imgdb.cn/item/63e5c7244757feff33ab7b25.png)
+
+![](https://pic.imgdb.cn/item/63e5c7244757feff33ab7b41.png)
+
+![](https://pic.imgdb.cn/item/63e5c7244757feff33ab7b5b.png)
+
+![](https://pic.imgdb.cn/item/63e5c7244757feff33ab7be2.png)
+
+![](https://pic.imgdb.cn/item/63e5c76f4757feff33abdda7.png)
+
+![](https://pic.imgdb.cn/item/63e5c76f4757feff33abddb6.png)
+
+![](https://pic.imgdb.cn/item/63e5c76f4757feff33abddcc.png)
+
+![](https://pic.imgdb.cn/item/63e5c7704757feff33abdeda.png)
+
+![](https://pic.imgdb.cn/item/63e5c7704757feff33abdef1.png)
+
+![](https://pic.imgdb.cn/item/63e5c7a34757feff33ac2d23.png)
 
 ### 管理员端
 
